@@ -1,0 +1,7 @@
+As a user I want to be able to simply and easily apply the correct formats to a dataset which I have imported from d3.csv and d3.json
+
+We want a NPM package which has two main functions:
+
+A dataFormat() function, which returns a formatted dataset - number strings converted to numbers, dates to date objects, etc
+
+A getSchema() function, which returns an object with information about the columns in the dataset - for each column we want to know the inferred type, and any formatting information we might need to display it. For example, a column full of date strings would return {“name”:”Date”, “type”:”Date”, “format”:”%Y-%m-%d}.
