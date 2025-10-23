@@ -10,13 +10,13 @@ Infer a dataset schema and format the dataset based on that schema.
 ## Install
 
 ```bash
-npm install schema-forge
+npm install @andyball/schema-forge
 ```
 
 ## Quick start
 
 ```js
-const { getSchema, dataFormat } = require('schema-forge');
+const { getSchema, dataFormat } = require('@andyball/schema-forge');
 
 const rows = [
   { name: 'Alice', age: '32', revenue: '$2,345.50', when: '2024-10-01' },
@@ -30,7 +30,25 @@ console.log(dataFormat(rows));
 console.log(dataFormat(rows, { numberEmptyAsNull: true }));
 ```
 
-CommonJS is supported; ESM interop via default export is also provided.
+### Importing
+
+CommonJS (require):
+
+```js
+const { getSchema, dataFormat } = require('@andyball/schema-forge');
+// or
+const forge = require('@andyball/schema-forge');
+forge.getSchema(...);
+```
+
+ESM (import):
+
+```js
+// After v0.1.1+ you can use named ESM imports
+import { getSchema, dataFormat } from '@andyball/schema-forge';
+// or default
+import forge from '@andyball/schema-forge';
+```
 
 ## API
 
