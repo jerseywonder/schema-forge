@@ -1,5 +1,8 @@
 const lib = require('../dist');
 const { getSchema, dataFormat } = lib;
+const fs = require('fs');
+const path = require('path');
+// d3-dsv is ESM; we'll dynamically import it in the CSV path
 
 /*
 const dataset = [
@@ -50,7 +53,25 @@ const dataset = [
 ]
 
 
-console.log('Schema:', getSchema(dataset));
-console.log(dataFormat(dataset));
+function runInMemory() {
+  console.log('Schema:', getSchema(dataset));
+  console.log(dataFormat(dataset));
+}
+
+async function runCsv(filePath) {
+  const abs = path.join(__dirname, path.basename(filePath));
+  const text = fs.readFileSync(abs, 'utf8');
+  const { csvParse } = await import('d3-dsv');
+  const rows = csvParse(text);
+  console.log('Rows:', rows.length);
+  const schema = getSchema(rows);
+  console.log('Schema:', schema);
+}
+
+if (process.argv[2] === 'csv') {
+  runCsv('abs-rd.csv').catch(err => { console.error(err); process.exit(1); });
+} else {
+  runInMemory();
+}
 
 

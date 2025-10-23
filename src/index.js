@@ -3,7 +3,7 @@
 /**
  * @typedef {Record<string, any>} DataRecord
  * @typedef {DataRecord[]} Dataset
- * @typedef {{ name: string, type: string, format: (string|null) }} ColumnSchema
+ * @typedef {{ name: string, type: string, format: (string|null), repeating?: boolean, sequential?: boolean }} ColumnSchema
  */
 
 /**
@@ -179,7 +179,21 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       if (!tf) continue;
 
       if (!acc.has(col)) {
-        acc.set(col, { types: new Set(), formatsByType: new Map(), sawNonEmpty: false });
+        acc.set(col, { 
+          types: new Set(),
+          formatsByType: new Map(),
+          sawNonEmpty: false,
+          // string stats
+          strSeen: new Set(),
+          hasStringDuplicate: false,
+          // number sequence stats
+          lastNum: undefined,
+          numCount: 0,
+          isSequential: true,
+          // number year-candidate stats
+          numFourDigitCount: 0,
+          numInRangeCount: 0
+        });
       }
       const entry = acc.get(col);
       entry.sawNonEmpty = true;
@@ -189,6 +203,43 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
         entry.formatsByType.set(tf.type, new Set());
       }
       entry.formatsByType.get(tf.type).add(tf.format ?? "__none__");
+
+      // Track repeating values for String-typed detections
+      if (tf.type === "String") {
+        const raw = row[col];
+        if (raw != null) {
+          const s = typeof raw === 'string' ? raw.trim() : String(raw).trim();
+          if (s !== '') {
+            if (entry.strSeen.has(s)) {
+              entry.hasStringDuplicate = true;
+            } else {
+              entry.strSeen.add(s);
+            }
+          }
+        }
+      }
+
+      // Track sequential numbers for Number-typed detections
+      if (tf.type === "Number") {
+        const raw = row[col];
+        const n = normalizeNumber(raw, { emptyAsNull: false });
+        if (typeof n === 'number' && Number.isFinite(n)) {
+          if (entry.numCount === 0) {
+            entry.lastNum = n;
+            entry.numCount = 1;
+          } else {
+            if (n - entry.lastNum !== 1) entry.isSequential = false;
+            entry.lastNum = n;
+            entry.numCount += 1;
+          }
+          // Track year-candidate stats
+          if (Number.isInteger(n)) {
+            if (n >= 1000 && n <= 9999) entry.numFourDigitCount += 1;
+            // Year range heuristic
+            if (n >= 1800 && n <= 2100) entry.numInRangeCount += 1;
+          }
+        }
+      }
     }
   }
 
@@ -206,14 +257,29 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       continue;
     }
 
-    const [onlyType] = [...types];
+    let [onlyType] = [...types];
     const fset = formatsByType.get(onlyType) || new Set(["__none__"]);
 
     let format = null;
+    // Heuristic: upgrade Number columns to Date (%Y) if values look like years
+    if (onlyType === "Number") {
+      const e = acc.get(name);
+      const hasCurrency = fset.has('Currency');
+      const hasPercentage = fset.has('Percentage');
+      const hasFloat = fset.has('Float');
+      const allFourDigits = e && e.numCount > 0 && e.numFourDigitCount === e.numCount;
+      const allInRange = e && e.numCount > 0 && e.numInRangeCount === e.numCount;
+      if (!hasCurrency && !hasPercentage && !hasFloat && allFourDigits && allInRange) {
+        onlyType = "Date";
+        format = "%Y";
+      }
+    }
+
     if (onlyType === "Date") {
       // Guess precise date format across the column's values
       const guessed = guessColumnDateFormat(rows, name);
-      format = guessed || null;
+      // Respect explicit %Y upgrade if already set
+      format = format || guessed || null;
       if (format === "__mixed__") format = "mixed";
     } else {
       if (fset.size === 1) {
@@ -224,7 +290,20 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       }
     }
 
-    results.push({ name, type: onlyType, format });
+    if (onlyType === "String") {
+      results.push({ name, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true) });
+    } else if (onlyType === "Number") {
+      const e = acc.get(name);
+      const sequential = e && e.numCount >= 2 ? e.isSequential === true : false;
+      results.push({ name, type: onlyType, format, sequential });
+    } else if (onlyType === "Date") {
+      // Provide sequential flag as well if derived from numeric sequence
+      const e = acc.get(name);
+      const sequential = e && e.numCount >= 2 ? e.isSequential === true : false;
+      results.push({ name, type: onlyType, format, sequential });
+    } else {
+      results.push({ name, type: onlyType, format });
+    }
   }
 
   // Post-pass: downgrade Number→String if preferStringNumbers and not all numeric

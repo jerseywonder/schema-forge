@@ -6,6 +6,9 @@ Infer a dataset schema and format the dataset based on that schema.
 - Recognizes common date formats and returns strftime-style formats (e.g. `%Y-%m-%d`)
 - Normalizes numeric fields: strips commas, currency symbols/codes, and `%`
 - Optional behaviors via options (e.g., convert empty numeric values to `null`)
+ - Flags String columns with repeated values (`repeating: true|false`)
+ - Flags Number columns that are strictly sequential (`sequential: true|false`)
+ - Heuristic year detection: 4‑digit integers in the range 1800–2100 are classified as Date with `format: "%Y"`
 
 ## Install
 
@@ -63,8 +66,10 @@ Returns an array of column descriptors:
 
 ```json
 [
-  { "name": "age", "type": "Number", "format": "Integer" },
-  { "name": "revenue", "type": "Number", "format": "Currency" },
+  { "name": "name", "type": "String", "format": null, "repeating": true },
+  { "name": "age", "type": "Number", "format": "Integer", "sequential": false },
+  { "name": "revenue", "type": "Number", "format": "Currency", "sequential": false },
+  { "name": "year", "type": "Date", "format": "%Y", "sequential": true },
   { "name": "active", "type": "Boolean", "format": "Boolean" },
   { "name": "when", "type": "Date", "format": "%Y-%m-%d" }
 ]
@@ -72,9 +77,11 @@ Returns an array of column descriptors:
 
 Notes on detection:
 - Numbers: handles `1,234.56`, `$2,000`, `12%`, `1234 USD`; outputs format `Integer`, `Float`, `Currency`, or `Percentage`.
+- Numbers also include `sequential`: true when successive numeric values increase by 1 (requires at least 2 numbers; non-numeric/empty values are ignored for the check).
+- Year heuristic: when a Number column consists only of 4‑digit integers all within 1800–2100 (and not currency/percentage/float), it is upgraded to `type: "Date"` with `format: "%Y"` and retains the `sequential` flag.
 - Booleans: `true`/`false` (case-insensitive) recognized.
 - Dates: recognizes ISO and common regional formats; returns strftime format (e.g., `%d/%m/%Y`, `%H:%M:%S`). Mixed formats → `format: "mixed"`.
-- Strings: URLs, emails, IP addresses, phone numbers, colors, and data URIs get subformats; others default to `null` format.
+- Strings: URLs, emails, IP addresses, phone numbers, colors, and data URIs get subformats; others default to `null` format. String descriptors also include `repeating`: true if any non-empty value repeats within the column.
 
 ### dataFormat(data, options?)
 
