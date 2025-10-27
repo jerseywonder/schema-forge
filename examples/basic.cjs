@@ -1,5 +1,5 @@
 const lib = require('../dist');
-const { getSchema, dataFormat } = lib;
+const { getSchema, dataFormat, toJSONSchema } = lib;
 const fs = require('fs');
 const path = require('path');
 // d3-dsv is ESM; we'll dynamically import it in the CSV path
@@ -66,11 +66,12 @@ async function runCsv(filePath) {
   console.log('Rows:', rows.length);
   const schema = getSchema(rows);
   console.log('Schema:', schema);
+  //console.log(toJSONSchema(schema));
   //console.log(dataFormat(rows));
 }
 
 if (process.argv[2] === 'csv') {
-  runCsv('international.csv').catch(err => { console.error(err); process.exit(1); });
+  runCsv('house-price.csv').catch(err => { console.error(err); process.exit(1); });
 } else {
   runInMemory();
 }

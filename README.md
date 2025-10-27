@@ -83,6 +83,26 @@ Notes on detection:
 - Dates: recognizes ISO and common regional formats; returns strftime format (e.g., `%d/%m/%Y`, `%H:%M:%S`). Mixed formats → `format: "mixed"`.
 - Strings: URLs, emails, IP addresses, phone numbers, colors, and data URIs get subformats; others default to `null` format. String descriptors also include `repeating`: true if any non-empty value repeats within the column.
 
+Scoring, probability and tally:
+- **tally**: counts per detected format in the column (e.g., `{ Text: 120, Percentage: 30 }`).
+- **score**: the dominance of the most frequent format, computed as `max(tally.values) / sum(tally.values)`.
+- **probably**: the label of the most frequent format from `tally`.
+  - For String columns where the top label is `Text`, extra hints apply:
+    - If values repeat: becomes `Categories` (or `Categories: a, b, c` when the unique set is small), or `Zero-variance column` if only one unique value.
+    - If comma/semicolon/pipe-delimited lists dominate: `List`.
+    - If `Percentage` dominates overall, `Percentage`.
+
+Column metrics:
+- **completeness**: fraction of non-empty values (`nonEmptyCount / totalRows`).
+- **distinctCount**: number of unique non-empty values (normalised as strings).
+- **cardinality**: `distinctCount / nonEmptyCount` (0 when `nonEmptyCount` is 0).
+- **topK**: up to 5 most frequent values as `[ [value, count], ... ]`.
+- Number columns include **numStats**: `{ min, max, mean, stdev }`.
+- String columns include **textStats**: `{ minLen, maxLen, avgLen }`.
+ - **uniquenessRatio**: `distinctCount / totalRows`.
+ - **isUnique**: `distinctCount === nonEmptyCount` and `nonEmptyCount > 0`.
+ - **isPrimaryKey**: `isUnique` and `completeness === 1`.
+
 ### dataFormat(data, options?)
 
 - **data**: `Array<object>`
@@ -106,6 +126,41 @@ const rows = [
 console.log(getSchema(rows));
 console.log(dataFormat(rows));
 ```
+
+### toJSONSchema(schemaOrRows, options?)
+
+Generate a JSON Schema (draft 2020-12) from a schema array or directly from rows (in which case `getSchema` runs first).
+
+- If column `type` is `Number`, maps to `number` (or `integer` for `format: "Integer"`). Includes `minimum`/`maximum` when available.
+- `Boolean` maps to `boolean`.
+- `Date` maps to `string` with hints:
+  - `%Y` → `pattern: ^(?:18|19|20|21)\d{2}$`
+  - `%Y-%m-%d` or `%Y/%m/%d` → `format: date`
+  - date-time forms with `%H`/`%I` → `format: date-time`
+- `String` columns include `minLength`/`maxLength` from text stats when available; `Financial year` adds a pattern.
+- Columns with `completeness === 1` are marked as `required`.
+
+Example:
+
+```js
+import { getSchema, toJSONSchema, dataFormat } from '@andyball/schema-forge';
+
+const rows = [ { id: 1, name: 'Alice' }, { id: 2, name: 'Bob' } ];
+const schema = getSchema(rows);
+const jsonSchema = toJSONSchema(schema);
+const wrangleData = dataFormat(rows)
+```
+
+### What is JSON Schema (draft 2020-12)?
+
+**JSON Schema** is a standard, machine-readable vocabulary for describing the shape and constraints of JSON data. It lets you specify what properties exist, their types, value ranges, string patterns, required fields, and more. Tools can then validate data against a schema, generate forms and UI, scaffold types, and power API contracts.
+
+- **Validation**: Check that incoming/outgoing JSON matches the expected structure before processing.
+- **Interoperability**: Share schemas across services, clients, and pipelines as a single source of truth.
+- **Tooling ecosystem**: Works with validators (e.g., AJV), documentation generators, code generators, and form builders.
+- **Draft 2020-12**: A widely adopted version of the JSON Schema specification with improved features and semantics.
+
+Learn more at the official site: [json-schema.org](https://json-schema.org).
 
 ## CLI-like local test
 

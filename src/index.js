@@ -3,7 +3,25 @@
 /**
  * @typedef {Record<string, any>} DataRecord
  * @typedef {DataRecord[]} Dataset
- * @typedef {{ name: string, type: string, format: (string|null), repeating?: boolean, sequential?: boolean, score?: number, probably?: string }} ColumnSchema
+ * @typedef {{
+ *   name: string,
+ *   type: string,
+ *   format: (string|null),
+ *   repeating?: boolean,
+ *   sequential?: boolean,
+ *   score?: number,
+ *   probably?: string,
+ *   tally?: Record<string, number>,
+ *   completeness?: number,
+ *   distinctCount?: number,
+ *   cardinality?: number,
+ *   topK?: Array<[string, number]>,
+ *   numStats?: { min: number, max: number, mean: number, stdev: number },
+ *   textStats?: { minLen: number, maxLen: number, avgLen: number },
+ *   isUnique?: boolean,
+ *   uniquenessRatio?: number,
+ *   isPrimaryKey?: boolean
+ * }} ColumnSchema
  */
 
 /**
@@ -193,6 +211,7 @@ function detectTypeAndFormat(value, preferStringNumbers = false) {
  */
 function getSchema(jsonData, { preferStringNumbers = false } = {}) {
   const rows = Array.isArray(jsonData) ? jsonData : JSON.parse(jsonData);
+  const totalRows = rows.length;
   const acc = new Map();
 
   for (const row of rows) {
@@ -209,6 +228,8 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
           formatsByType: new Map(),
           sawNonEmpty: false,
           nonEmptyCount: 0,
+          uniqueValues: new Set(),
+          valueCounts: new Map(),
           formatCounts: new Map(),
           typeCounts: new Map(),
           // string stats
@@ -225,7 +246,11 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
           isSequential: true,
           // number year-candidate stats
           numFourDigitCount: 0,
-          numInRangeCount: 0
+          numInRangeCount: 0,
+          // numeric stats
+          numStats: { count: 0, sum: 0, sumSq: 0, min: Infinity, max: -Infinity },
+          // text stats
+          textStats: { count: 0, minLen: Infinity, maxLen: 0, sumLen: 0 }
         });
       }
       const entry = acc.get(col);
@@ -243,6 +268,10 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       entry.formatCounts.set(label, (entry.formatCounts.get(label) || 0) + 1);
       // Count base types
       entry.typeCounts.set(tf.type, (entry.typeCounts.get(tf.type) || 0) + 1);
+      // Distinct tracking by normalised string
+      const vRaw = row[col];
+      const distinctKey = (typeof vRaw === 'string') ? String(vRaw).trim() : String(vRaw);
+      if (distinctKey !== '') entry.uniqueValues.add(distinctKey);
 
       // Track repeating values for String-typed detections
       if (tf.type === "String") {
@@ -259,6 +288,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
             // value frequency
             const c = (entry.strValueCounts.get(s) || 0) + 1;
             entry.strValueCounts.set(s, c);
+            entry.valueCounts.set(s, (entry.valueCounts.get(s) || 0) + 1);
             if (c > entry.maxStrValueCount) entry.maxStrValueCount = c;
             // text subformats aggregation
             if (tf.format === 'Text') {
@@ -266,6 +296,12 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
             }
             // list heuristic
             if (isLikelyList(s)) entry.listCount += 1;
+            // text stats
+            const L = s.length;
+            entry.textStats.count += 1;
+            entry.textStats.sumLen += L;
+            if (L < entry.textStats.minLen) entry.textStats.minLen = L;
+            if (L > entry.textStats.maxLen) entry.textStats.maxLen = L;
           }
         }
       }
@@ -275,6 +311,16 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
         const raw = row[col];
         const n = normalizeNumber(raw, { emptyAsNull: false });
         if (typeof n === 'number' && Number.isFinite(n)) {
+          // numeric stats
+          const ns = entry.numStats;
+          ns.count += 1;
+          ns.sum += n;
+          ns.sumSq += n*n;
+          if (n < ns.min) ns.min = n;
+          if (n > ns.max) ns.max = n;
+          // value counts
+          const nKey = String(n);
+          entry.valueCounts.set(nKey, (entry.valueCounts.get(nKey) || 0) + 1);
           if (entry.numCount === 0) {
             entry.lastNum = n;
             entry.numCount = 1;
@@ -302,7 +348,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
 
   for (const [name, { types, formatsByType, sawNonEmpty }] of acc.entries()) {
     if (!sawNonEmpty) {
-      results.push({ name, type: "String", format: null, tally: {} });
+      results.push({ name, type: "String", format: null, tally: {}, completeness: 0, distinctCount: 0, cardinality: 0, uniquenessRatio: 0, isUnique: false, isPrimaryKey: false });
       continue;
     }
 
@@ -354,7 +400,18 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
         }
       }
       const repeating = (acc.get(name)?.hasStringDuplicate === true);
-      addResult({ name, type: "String", format: "mixed", repeating, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
+      {
+        const e2 = acc.get(name);
+        const nonEmpty = e2.nonEmptyCount;
+        const distinct = e2.uniqueValues.size;
+        const completeness = totalRows ? (nonEmpty / totalRows) : 0;
+        const cardinality = nonEmpty ? (distinct / nonEmpty) : 0;
+        const topK = [...e2.valueCounts.entries()].sort((a,b)=> b[1]-a[1]).slice(0, 5);
+        const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
+        const isUnique = distinct === nonEmpty && nonEmpty > 0;
+        const isPrimaryKey = isUnique && completeness === 1;
+        addResult({ name, type: "String", format: "mixed", repeating, score, probably, tally: Object.fromEntries(e2.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
+      }
       continue;
     }
 
@@ -430,18 +487,56 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
     }
 
     if (onlyType === "String") {
-      addResult({ name, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true), score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
+      const e4 = acc.get(name);
+      const nonEmpty = e4.nonEmptyCount;
+      const distinct = e4.uniqueValues.size;
+      const completeness = totalRows ? (nonEmpty / totalRows) : 0;
+      const cardinality = nonEmpty ? (distinct / nonEmpty) : 0;
+      const topK = [...e4.valueCounts.entries()].sort((a,b)=> b[1]-a[1]).slice(0, 5);
+      const textStats = e4.textStats.count ? { minLen: e4.textStats.minLen, maxLen: e4.textStats.maxLen, avgLen: e4.textStats.sumLen / e4.textStats.count } : undefined;
+      const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
+      const isUnique = distinct === nonEmpty && nonEmpty > 0;
+      const isPrimaryKey = isUnique && completeness === 1;
+      addResult({ name, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true), score, probably, tally: Object.fromEntries(e4.formatCounts), completeness, distinctCount: distinct, cardinality, topK, textStats, uniquenessRatio, isUnique, isPrimaryKey });
     } else if (onlyType === "Number") {
       const e2 = acc.get(name);
       const sequential = e2 && e2.numCount >= 2 ? e2.isSequential === true : false;
-      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
+      const nonEmpty = e2.nonEmptyCount;
+      const distinct = e2.uniqueValues.size;
+      const completeness = totalRows ? (nonEmpty / totalRows) : 0;
+      const cardinality = nonEmpty ? (distinct / nonEmpty) : 0;
+      const topK = [...e2.valueCounts.entries()].sort((a,b)=> b[1]-a[1]).slice(0, 5);
+      const ns = e2.numStats;
+      const variance = ns.count > 1 ? (ns.sumSq - (ns.sum*ns.sum)/ns.count) / (ns.count - 1) : 0;
+      const numStats = ns.count ? { min: ns.min, max: ns.max, mean: ns.sum / ns.count, stdev: Math.sqrt(Math.max(0, variance)) } : undefined;
+      const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
+      const isUnique = distinct === nonEmpty && nonEmpty > 0;
+      const isPrimaryKey = isUnique && completeness === 1;
+      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(e2.formatCounts), completeness, distinctCount: distinct, cardinality, topK, numStats, uniquenessRatio, isUnique, isPrimaryKey });
     } else if (onlyType === "Date") {
       // Provide sequential flag as well if derived from numeric sequence
       const e3 = acc.get(name);
       const sequential = e3 && e3.numCount >= 2 ? e3.isSequential === true : false;
-      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
+      const nonEmpty = e3.nonEmptyCount;
+      const distinct = e3.uniqueValues.size;
+      const completeness = totalRows ? (nonEmpty / totalRows) : 0;
+      const cardinality = nonEmpty ? (distinct / nonEmpty) : 0;
+      const topK = [...e3.valueCounts.entries()].sort((a,b)=> b[1]-a[1]).slice(0, 5);
+      const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
+      const isUnique = distinct === nonEmpty && nonEmpty > 0;
+      const isPrimaryKey = isUnique && completeness === 1;
+      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(e3.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
     } else {
-      addResult({ name, type: onlyType, format, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
+      const e5 = acc.get(name);
+      const nonEmpty = e5.nonEmptyCount;
+      const distinct = e5.uniqueValues.size;
+      const completeness = totalRows ? (nonEmpty / totalRows) : 0;
+      const cardinality = nonEmpty ? (distinct / nonEmpty) : 0;
+      const topK = [...e5.valueCounts.entries()].sort((a,b)=> b[1]-a[1]).slice(0, 5);
+      const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
+      const isUnique = distinct === nonEmpty && nonEmpty > 0;
+      const isPrimaryKey = isUnique && completeness === 1;
+      addResult({ name, type: onlyType, format, score, probably, tally: Object.fromEntries(e5.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
     }
   }
 
@@ -465,6 +560,73 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
   return results;
 }
 
+
+/**
+ * Convert a schema (or rows) into a JSON Schema object.
+ * If an array of rows is provided, the schema is inferred first.
+ * @param {ColumnSchema[]|Dataset} input
+ * @param {{ preferStringNumbers?: boolean }} [options]
+ * @returns {object}
+ */
+function toJSONSchema(input, options = {}) {
+  /** @type {ColumnSchema[]} */
+  const schema = Array.isArray(input) && input.length && typeof input[0] === 'object' && !('name' in input[0])
+    ? getSchema(/** @type {Dataset} */(input), options)
+    : /** @type {ColumnSchema[]} */(input);
+
+  const properties = {};
+  const required = [];
+
+  for (const col of schema) {
+    const colSchema = {};
+    if (col.type === 'Number') {
+      if (col.format === 'Integer') {
+        colSchema.type = 'integer';
+      } else {
+        colSchema.type = 'number';
+      }
+      if (col.numStats) {
+        if (Number.isFinite(col.numStats.min)) colSchema.minimum = col.numStats.min;
+        if (Number.isFinite(col.numStats.max)) colSchema.maximum = col.numStats.max;
+      }
+    } else if (col.type === 'Boolean') {
+      colSchema.type = 'boolean';
+    } else if (col.type === 'Date') {
+      colSchema.type = 'string';
+      if (typeof col.format === 'string') {
+        const fmt = col.format;
+        if (fmt === '%Y') {
+          colSchema.pattern = '^(?:18|19|20|21)\\d{2}$';
+        } else if (/^%Y[-/]%m[-/]%d$/.test(fmt)) {
+          colSchema.format = 'date';
+        } else if (/%H|%I/.test(fmt)) {
+          colSchema.format = 'date-time';
+        }
+      }
+    } else {
+      colSchema.type = 'string';
+      if (col.format === 'Financial year') {
+        colSchema.pattern = '^(?:19|20)\\d{2}[-–]\\d{2}$';
+      }
+      if (col.textStats) {
+        if (Number.isFinite(col.textStats.minLen)) colSchema.minLength = Math.max(0, col.textStats.minLen);
+        if (Number.isFinite(col.textStats.maxLen)) colSchema.maxLength = Math.max(0, col.textStats.maxLen);
+      }
+    }
+
+    properties[col.name] = colSchema;
+    if (col.completeness === 1) required.push(col.name);
+  }
+
+  const out = {
+    $schema: 'https://json-schema.org/draft/2020-12/schema',
+    type: 'object',
+    properties,
+    required
+  };
+  if (required.length === 0) delete out.required;
+  return out;
+}
 
 /**
  * Guess a moment-like date format string from a single value string.
@@ -550,7 +712,7 @@ function guessColumnDateFormat(rows, columnName) {
 
 
 
-const api = { dataFormat, getSchema };
+const api = { dataFormat, getSchema, toJSONSchema };
 
 module.exports = api;
 // Preserve default import style: require('pkg').default
