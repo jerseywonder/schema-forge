@@ -1,9 +1,9 @@
-// moment not used; removed
+
 
 /**
  * @typedef {Record<string, any>} DataRecord
  * @typedef {DataRecord[]} Dataset
- * @typedef {{ name: string, type: string, format: (string|null), repeating?: boolean, sequential?: boolean }} ColumnSchema
+ * @typedef {{ name: string, type: string, format: (string|null), repeating?: boolean, sequential?: boolean, score?: number, probably?: string }} ColumnSchema
  */
 
 /**
@@ -48,6 +48,18 @@ function normalizeBoolean(value) {
   if (s === 'true') return true;
   if (s === 'false') return false;
   return value;
+}
+
+/**
+ * Heuristic: detect if a string looks like a delimited list (comma/semicolon/pipe).
+ * Requires at least 2 non-empty parts and reasonable average token length.
+ * @param {string} s
+ */
+function isLikelyList(s) {
+  const parts = String(s).split(/[;,|]/).map(p => p.trim()).filter(Boolean);
+  if (parts.length < 2) return false;
+  const avg = parts.reduce((sum, p) => sum + p.length, 0) / parts.length;
+  return avg <= 30;
 }
 
 /**
@@ -130,6 +142,8 @@ function detectTypeAndFormat(value, preferStringNumbers = false) {
   }
 
   // String subformats
+  // Financial year like 2011-12 or 2011–12
+  if (/^(19|20)\d{2}[-–](\d{2})$/.test(vStr)) return { type: "String", format: "Financial year" };
   if (/^(https?:\/\/)\S+$/i.test(vStr)) return { type: "String", format: "URL" };
   if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(vStr))
     return { type: "String", format: "Email" };
@@ -154,10 +168,21 @@ function detectTypeAndFormat(value, preferStringNumbers = false) {
     } catch {}
   }
 
-  if (vStr.length > 50) return { type: "String", format: "Text" };
+  if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(vStr))
+    return { type: "String", format: "Text" };
 
-  return { type: "String", format: null };
+
+  const len = vStr.length;
+  const sentences = (vStr.match(/[.!?](\s|$)/g) || []).length;
+  if (len > 80 && sentences >= 1) return { type: "String", format: "Text"};
+  if (sentences >= 1) return { type: "String", format: "Text" };
+  if (len > 50) return { type: "String", format: "Text" };
+
+
+  return { type: "String", format: "Text" };
 }
+
+// Removed specialized global string category detectors; using generic category vs text heuristic instead.
 
 /**
  * Auto-detect column types.
@@ -183,9 +208,17 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
           types: new Set(),
           formatsByType: new Map(),
           sawNonEmpty: false,
+          nonEmptyCount: 0,
+          formatCounts: new Map(),
+          typeCounts: new Map(),
           // string stats
           strSeen: new Set(),
           hasStringDuplicate: false,
+          strValueCounts: new Map(),
+          maxStrValueCount: 0,
+          strObsCount: 0,
+          textFormatCounts: new Map(), // Paragraph/Sentence/Text counts among string obs
+          listCount: 0,
           // number sequence stats
           lastNum: undefined,
           numCount: 0,
@@ -204,17 +237,35 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       }
       entry.formatsByType.get(tf.type).add(tf.format ?? "__none__");
 
+      // Count formats for score/probably
+      entry.nonEmptyCount += 1;
+      const label = (tf && typeof tf.format === 'string' && tf.format.length > 0) ? tf.format : tf.type;
+      entry.formatCounts.set(label, (entry.formatCounts.get(label) || 0) + 1);
+      // Count base types
+      entry.typeCounts.set(tf.type, (entry.typeCounts.get(tf.type) || 0) + 1);
+
       // Track repeating values for String-typed detections
       if (tf.type === "String") {
         const raw = row[col];
         if (raw != null) {
           const s = typeof raw === 'string' ? raw.trim() : String(raw).trim();
           if (s !== '') {
+            entry.strObsCount += 1;
             if (entry.strSeen.has(s)) {
               entry.hasStringDuplicate = true;
             } else {
               entry.strSeen.add(s);
             }
+            // value frequency
+            const c = (entry.strValueCounts.get(s) || 0) + 1;
+            entry.strValueCounts.set(s, c);
+            if (c > entry.maxStrValueCount) entry.maxStrValueCount = c;
+            // text subformats aggregation
+            if (tf.format === 'Text') {
+              entry.textFormatCounts.set(tf.format, (entry.textFormatCounts.get(tf.format) || 0) + 1);
+            }
+            // list heuristic
+            if (isLikelyList(s)) entry.listCount += 1;
           }
         }
       }
@@ -244,16 +295,66 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
   }
 
   const results = [];
+  function addResult(entry) {
+    if (entry.probably === undefined) delete entry.probably;
+    results.push(entry);
+  }
 
   for (const [name, { types, formatsByType, sawNonEmpty }] of acc.entries()) {
     if (!sawNonEmpty) {
-      results.push({ name, type: "String", format: null });
+      results.push({ name, type: "String", format: null, tally: {} });
       continue;
     }
 
-    // If mixed base types → treat as String + mixed
+    // If mixed base types → treat as String + mixed, but still compute score/probably and repeating
     if (types.size > 1) {
-      results.push({ name, type: "String", format: "mixed" });
+      const e = acc.get(name);
+      let score, probably;
+      if (e && e.nonEmptyCount > 0) {
+        const top = [...e.formatCounts.entries()].sort((a,b)=> b[1]-a[1])[0];
+        if (top) {
+          score = top[1] / e.nonEmptyCount;
+          if (score < 1) probably = top[0];
+        }
+        // Prefer String heuristics (Category vs Text) when present
+        if (e.strObsCount > 0) {
+          const categoryScore = e.maxStrValueCount / e.strObsCount;
+          const tCounts = e.textFormatCounts;
+          const textScore = e.strObsCount > 0 ? ((tCounts.get('Text')||0) / e.strObsCount) : 0;
+          const listScore = e.strObsCount > 0 ? (e.listCount / e.strObsCount) : 0;
+          if (listScore >= textScore && listScore >= categoryScore && listScore > 0) {
+            score = listScore;
+            probably = 'List';
+          } else if (textScore >= categoryScore && textScore > 0) {
+            score = textScore;
+            probably = 'Text';
+          } else if (categoryScore > 0) {
+            score = categoryScore;
+            probably = 'Category';
+          }
+        }
+        // If percentages dominate overall, prefer Percentage
+        const percCount = e.formatCounts.get('Percentage') || 0;
+        const percScore = e.nonEmptyCount ? (percCount / e.nonEmptyCount) : 0;
+        if (percScore > (score || 0)) {
+          score = percScore;
+          probably = 'Percentage';
+        }
+
+        // Recalculate score/probably from tally (formatCounts): top label and max count / total
+        const tallyEntries = [...e.formatCounts.entries()].sort((a,b)=> b[1]-a[1]);
+        if (tallyEntries.length) {
+          let total = 0;
+          for (const [, c] of tallyEntries) total += c;
+          const [topLabel, topCount] = tallyEntries[0];
+          if (total) {
+            score = topCount / total;
+            probably = topLabel;
+          }
+        }
+      }
+      const repeating = (acc.get(name)?.hasStringDuplicate === true);
+      addResult({ name, type: "String", format: "mixed", repeating, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
       continue;
     }
 
@@ -290,19 +391,57 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       }
     }
 
+    // Compute score/probably from counted formats; for Strings use category vs text heuristic
+    const e = acc.get(name);
+    let score, probably;
+    if (e && e.nonEmptyCount > 0) {
+      // base score by format frequency
+      const top = [...e.formatCounts.entries()].sort((a,b)=> b[1]-a[1])[0];
+      if (top) {
+        score = top[1] / e.nonEmptyCount;
+        if (score < 1) probably = top[0];
+      }
+      if (onlyType === "String") {
+        // Calculate score/probably from tally (formatCounts): top label and max count / total
+        const tallyEntries = [...e.formatCounts.entries()].sort((a,b)=> b[1]-a[1]);
+        if (tallyEntries.length) {
+          let total = 0;
+          for (const [, c] of tallyEntries) total += c;
+          const [topLabel, topCount] = tallyEntries[0];
+          if (total) {
+            score = topCount / total;
+            probably = topLabel;
+
+            if (topLabel === "Text" && acc.get(name)?.hasStringDuplicate === true) {
+              if ([...acc.get(name).strSeen].length > 1) {
+
+                if ([...acc.get(name).strSeen].length < 10) {
+                probably = 'Categories: ' + [...acc.get(name).strSeen].join(', ');
+                } else {
+                  probably = 'Categories';
+                }
+              } else {
+                probably = 'Zero-variance column';
+              }
+            }
+          }
+        }
+      }
+    }
+
     if (onlyType === "String") {
-      results.push({ name, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true) });
+      addResult({ name, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true), score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
     } else if (onlyType === "Number") {
-      const e = acc.get(name);
-      const sequential = e && e.numCount >= 2 ? e.isSequential === true : false;
-      results.push({ name, type: onlyType, format, sequential });
+      const e2 = acc.get(name);
+      const sequential = e2 && e2.numCount >= 2 ? e2.isSequential === true : false;
+      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
     } else if (onlyType === "Date") {
       // Provide sequential flag as well if derived from numeric sequence
-      const e = acc.get(name);
-      const sequential = e && e.numCount >= 2 ? e.isSequential === true : false;
-      results.push({ name, type: onlyType, format, sequential });
+      const e3 = acc.get(name);
+      const sequential = e3 && e3.numCount >= 2 ? e3.isSequential === true : false;
+      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
     } else {
-      results.push({ name, type: onlyType, format });
+      addResult({ name, type: onlyType, format, score, probably, tally: Object.fromEntries(acc.get(name).formatCounts) });
     }
   }
 
