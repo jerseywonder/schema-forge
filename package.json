@@ -1,6 +1,6 @@
 {
   "name": "@andyball/schema-forge",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A npm package which does two things: returns a schema for a dataset, and returns a formated version of a dataset based on its schema.",
   "license": "MIT",
   "author": "Andy Ball",
@@ -24,7 +24,8 @@
     "prepare": "npm run build",
     "test": "npm run build && node -e \"const lib=require('./dist'); const {getSchema,dataFormat}=lib; const ds=[{a:1,b:'x'},{a:2,c:true}]; const schema=getSchema(ds); const byName=Object.fromEntries(schema.map(c=>[c.name,c])); if(byName.a?.type!=='Number'||byName.b?.type!=='String'||byName.c?.type!=='Boolean'){console.error('bad schema',schema); process.exit(1);} const same=dataFormat(ds); if(same!==ds){console.error('dataFormat should return same dataset'); process.exit(1);} console.log('ok');\"",
     "example": "npm run build && node examples/basic.cjs",
-    "example:csv": "npm run build && node examples/basic.cjs csv"
+    "example:csv": "npm run build && node examples/basic.cjs csv",
+    "wrangle": "npm run build && node examples/wrangle.cjs"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

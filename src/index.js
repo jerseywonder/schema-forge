@@ -20,7 +20,8 @@
  *   textStats?: { minLen: number, maxLen: number, avgLen: number },
  *   isUnique?: boolean,
  *   uniquenessRatio?: number,
- *   isPrimaryKey?: boolean
+ *   isPrimaryKey?: boolean,
+ *   sourceName?: string
  * }} ColumnSchema
  */
 
@@ -85,7 +86,11 @@ function isLikelyList(s) {
  * - Number: convert strings like "1,234.56", "$2,000" or "12%" to actual numbers
  * Other types are left as-is for now.
  * @param {Dataset} dataset
- * @param {{ preferStringNumbers?: boolean, numberEmptyAsNull?: boolean }} [options]
+ * @param {object} [options]
+ * @param {boolean} [options.preferStringNumbers=false]
+ * @param {boolean} [options.numberEmptyAsNull=true]
+ * @param {boolean} [options.sanitizeKeys=false]
+ * @param {boolean} [options.dropEmptyColumns=false]
  * @returns {Dataset}
  */
 function dataFormat(dataset, options = {}) {
@@ -94,19 +99,24 @@ function dataFormat(dataset, options = {}) {
   const byName = Object.fromEntries(schema.map(c => [c.name, c]));
   const numberEmptyAsNull = options.numberEmptyAsNull !== undefined ? options.numberEmptyAsNull : true;
   const out = new Array(rows.length);
+  const sanitize = options && options.sanitizeKeys === true;
+  const dropEmptyColumns = options && options.dropEmptyColumns === true;
+  const columnsToInclude = dropEmptyColumns ? Object.keys(byName) : null;
   for (let i = 0; i < rows.length; i++) {
     const src = rows[i];
-    const dst = { ...src };
+    const dst = sanitize || dropEmptyColumns ? {} : { ...src };
     for (const key in byName) {
-      if (!Object.prototype.hasOwnProperty.call(src, key)) continue;
       const col = byName[key];
-      const val = src[key];
+      const sourceKey = sanitize && col.sourceName ? col.sourceName : key;
+      if (!Object.prototype.hasOwnProperty.call(src, sourceKey)) continue;
+      const val = src[sourceKey];
+      const targetKey = key;
       if (col.type === 'Number') {
-        dst[key] = normalizeNumber(val, { emptyAsNull: numberEmptyAsNull });
+        dst[targetKey] = normalizeNumber(val, { emptyAsNull: numberEmptyAsNull });
       } else if (col.type === 'Boolean') {
-        dst[key] = normalizeBoolean(val);
+        dst[targetKey] = normalizeBoolean(val);
       } else {
-        dst[key] = val;
+        dst[targetKey] = val;
       }
     }
     out[i] = dst;
@@ -205,25 +215,56 @@ function detectTypeAndFormat(value, preferStringNumbers = false) {
 /**
  * Auto-detect column types.
  * @param {Array|String} jsonData - Array of row objects or a JSON string.
- * @param {Object} options
+ * @param {object} [options]
  * @param {boolean} [options.preferStringNumbers=false] - Treat numeric strings as String unless all values are numeric.
+ * @param {boolean} [options.sanitizeKeys=false] - Sanitize column names (strip invisible/control chars, normalize, dedupe). Adds sourceName with original.
+ * @param {boolean} [options.dropEmptyColumns=false] - If true, columns with no non-empty values are excluded from schema and output rows.
  * @returns {ColumnSchema[]}
  */
-function getSchema(jsonData, { preferStringNumbers = false } = {}) {
+function getSchema(jsonData, { preferStringNumbers = false, sanitizeKeys = false, dropEmptyColumns = false } = {}) {
   const rows = Array.isArray(jsonData) ? jsonData : JSON.parse(jsonData);
   const totalRows = rows.length;
   const acc = new Map();
+  const usedSanitized = new Set();
+  const originalToSanitized = new Map();
+  function sanitizeKey(name) {
+    let s = String(name);
+    try { s = s.normalize('NFC'); } catch {}
+    s = s.replace(/[\uFEFF\u200B-\u200D\u2060\u00A0\u00AD]/g, '');
+    s = s.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+    s = s.replace(/\s+/g, ' ').trim();
+    if (s === '') s = 'col';
+    return s;
+  }
+  function getUniqueSanitized(name) {
+    const base = sanitizeKey(name);
+    let candidate = base;
+    let n = 2;
+    while (usedSanitized.has(candidate)) {
+      candidate = base + '_' + n;
+      n += 1;
+    }
+    usedSanitized.add(candidate);
+    return candidate;
+  }
 
   for (const row of rows) {
     if (!row || typeof row !== "object") continue;
 
     for (const col in row) {
+      let keyName = col;
+      if (sanitizeKeys) {
+        if (!originalToSanitized.has(col)) {
+          originalToSanitized.set(col, getUniqueSanitized(col));
+        }
+        keyName = originalToSanitized.get(col);
+      }
       if (!Object.prototype.hasOwnProperty.call(row, col)) continue;
       const tf = detectTypeAndFormat(row[col], preferStringNumbers);
       if (!tf) continue;
 
-      if (!acc.has(col)) {
-        acc.set(col, { 
+      if (!acc.has(keyName)) {
+        acc.set(keyName, { 
           types: new Set(),
           formatsByType: new Map(),
           sawNonEmpty: false,
@@ -250,10 +291,11 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
           // numeric stats
           numStats: { count: 0, sum: 0, sumSq: 0, min: Infinity, max: -Infinity },
           // text stats
-          textStats: { count: 0, minLen: Infinity, maxLen: 0, sumLen: 0 }
+          textStats: { count: 0, minLen: Infinity, maxLen: 0, sumLen: 0 },
+          sourceName: sanitizeKeys ? col : undefined
         });
       }
-      const entry = acc.get(col);
+      const entry = acc.get(keyName);
       entry.sawNonEmpty = true;
 
       entry.types.add(tf.type);
@@ -343,12 +385,16 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
   const results = [];
   function addResult(entry) {
     if (entry.probably === undefined) delete entry.probably;
+    if (entry.sourceName === undefined) delete entry.sourceName;
     results.push(entry);
   }
 
   for (const [name, { types, formatsByType, sawNonEmpty }] of acc.entries()) {
     if (!sawNonEmpty) {
-      results.push({ name, type: "String", format: null, tally: {}, completeness: 0, distinctCount: 0, cardinality: 0, uniquenessRatio: 0, isUnique: false, isPrimaryKey: false });
+      const entry = acc.get(name);
+      if (!dropEmptyColumns) {
+        results.push({ name, sourceName: entry && entry.sourceName ? entry.sourceName : undefined, type: "String", format: null, tally: {}, completeness: 0, distinctCount: 0, cardinality: 0, uniquenessRatio: 0, isUnique: false, isPrimaryKey: false });
+      }
       continue;
     }
 
@@ -410,7 +456,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
         const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
         const isUnique = distinct === nonEmpty && nonEmpty > 0;
         const isPrimaryKey = isUnique && completeness === 1;
-        addResult({ name, type: "String", format: "mixed", repeating, score, probably, tally: Object.fromEntries(e2.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
+        addResult({ name, sourceName: e2.sourceName, type: "String", format: "mixed", repeating, score, probably, tally: Object.fromEntries(e2.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
       }
       continue;
     }
@@ -497,7 +543,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
       const isUnique = distinct === nonEmpty && nonEmpty > 0;
       const isPrimaryKey = isUnique && completeness === 1;
-      addResult({ name, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true), score, probably, tally: Object.fromEntries(e4.formatCounts), completeness, distinctCount: distinct, cardinality, topK, textStats, uniquenessRatio, isUnique, isPrimaryKey });
+      addResult({ name, sourceName: e4.sourceName, type: onlyType, format, repeating: (acc.get(name)?.hasStringDuplicate === true), score, probably, tally: Object.fromEntries(e4.formatCounts), completeness, distinctCount: distinct, cardinality, topK, textStats, uniquenessRatio, isUnique, isPrimaryKey });
     } else if (onlyType === "Number") {
       const e2 = acc.get(name);
       const sequential = e2 && e2.numCount >= 2 ? e2.isSequential === true : false;
@@ -512,7 +558,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
       const isUnique = distinct === nonEmpty && nonEmpty > 0;
       const isPrimaryKey = isUnique && completeness === 1;
-      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(e2.formatCounts), completeness, distinctCount: distinct, cardinality, topK, numStats, uniquenessRatio, isUnique, isPrimaryKey });
+      addResult({ name, sourceName: e2.sourceName, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(e2.formatCounts), completeness, distinctCount: distinct, cardinality, topK, numStats, uniquenessRatio, isUnique, isPrimaryKey });
     } else if (onlyType === "Date") {
       // Provide sequential flag as well if derived from numeric sequence
       const e3 = acc.get(name);
@@ -525,7 +571,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
       const isUnique = distinct === nonEmpty && nonEmpty > 0;
       const isPrimaryKey = isUnique && completeness === 1;
-      addResult({ name, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(e3.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
+      addResult({ name, sourceName: e3.sourceName, type: onlyType, format, sequential, score, probably, tally: Object.fromEntries(e3.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
     } else {
       const e5 = acc.get(name);
       const nonEmpty = e5.nonEmptyCount;
@@ -536,7 +582,7 @@ function getSchema(jsonData, { preferStringNumbers = false } = {}) {
       const uniquenessRatio = totalRows ? (distinct / totalRows) : 0;
       const isUnique = distinct === nonEmpty && nonEmpty > 0;
       const isPrimaryKey = isUnique && completeness === 1;
-      addResult({ name, type: onlyType, format, score, probably, tally: Object.fromEntries(e5.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
+      addResult({ name, sourceName: e5.sourceName, type: onlyType, format, score, probably, tally: Object.fromEntries(e5.formatCounts), completeness, distinctCount: distinct, cardinality, topK, uniquenessRatio, isUnique, isPrimaryKey });
     }
   }
 

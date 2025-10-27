@@ -61,6 +61,8 @@ import forge from '@andyball/schema-forge';
 - **options**:
   - **preferStringNumbers**: `boolean` (default: `false`)
     - If `true`, numeric-looking strings remain as String unless all values are numeric
+  - **sanitizeKeys**: `boolean` (default: `false`)
+    - If `true`, column names are sanitized: Unicode formatting/invisible/control chars removed, whitespace collapsed, NFC normalized, and deduped; original preserved on each column as `sourceName`.
 
 Returns an array of column descriptors:
 
@@ -109,6 +111,8 @@ Column metrics:
 - **options**:
   - **preferStringNumbers**: `boolean` (default: `false`) – passed through to `getSchema`
   - **numberEmptyAsNull**: `boolean` (default: `true`) – empty numeric values become `null`
+  - **sanitizeKeys**: `boolean` (default: `false`) – if enabled, output rows use sanitized keys and map from original keys using `sourceName` in schema.
+  - **dropEmptyColumns**: `boolean` (default: `false`) – if enabled, columns with no non-empty values are excluded from schema and removed from formatted output rows.
 
 Returns a new array of formatted rows. Current conversions:
 - Number columns: strings like `"1,234.56"`, `"$2,000"`, `"12%"` → numbers

@@ -71,7 +71,7 @@ async function runCsv(filePath) {
 }
 
 if (process.argv[2] === 'csv') {
-  runCsv('house-price.csv').catch(err => { console.error(err); process.exit(1); });
+  runCsv('international.csv').catch(err => { console.error(err); process.exit(1); });
 } else {
   runInMemory();
 }
