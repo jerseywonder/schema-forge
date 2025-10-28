@@ -1,6 +1,6 @@
 {
   "name": "@andyball/schema-forge",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "A npm package which does two things: returns a schema for a dataset, and returns a formated version of a dataset based on its schema.",
   "license": "MIT",
   "author": "Andy Ball",
@@ -17,6 +17,14 @@
     "dist"
   ],
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerseywonder/schema-forge.git"
+  },
+  "homepage": "https://github.com/jerseywonder/schema-forge#readme",
+  "bugs": {
+    "url": "https://github.com/jerseywonder/schema-forge/issues"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "postbuild": "node scripts/make-esm-wrapper.cjs",
