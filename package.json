@@ -16,7 +16,19 @@
   "files": [
     "dist"
   ],
-  "keywords": [],
+  "keywords": [
+    "schema",
+    "schema inference",
+    "data profiling",
+    "data wrangling",
+    "data cleaning",
+    "data validation",
+    "json schema",
+    "dataset",
+    "type detection",
+    "date parsing",
+    "number parsing"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jerseywonder/schema-forge.git"
