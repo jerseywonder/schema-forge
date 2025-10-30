@@ -3,8 +3,6 @@ const { getSchema, dataFormat, toJSONSchema } = lib;
 const fs = require('fs');
 const path = require('path');
 
-
-
 async function runCsv(filePath) {
   const abs = path.join(__dirname, path.basename(filePath));
   const text = fs.readFileSync(abs, 'utf8');
@@ -19,7 +17,6 @@ async function runCsv(filePath) {
   fs.writeFileSync(outPath, JSON.stringify(wrangled, null, 2));
   console.log('Wrangled data written to:', outPath);
 }
-
 
 async function main() {
   const entries = fs.readdirSync(__dirname, { withFileTypes: true });

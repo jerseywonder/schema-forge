@@ -166,4 +166,80 @@ Returns a new array of formatted rows. Current conversions:
 - Number columns: strings like `"1,234.56"`, `"$2,000"`, `"12%"` → numbers
 - Boolean columns: `"true"`/`"false"` → booleans
 - Date columns: left as-is unless `convertDates` is enabled, in which case values are converted to JavaScript `Date` instances when parsable.
-- String columns: left as-is unless `bestGuess` is enabled, in which case numeric-dominant Strings (e.g., `
+- String columns: left as-is unless `bestGuess` is enabled.
+
+Example:
+
+```js
+const rows = [
+  { revenue: "$2,345,000.50", pct: "12%", active: "true", when: "31/12/2020" },
+  { revenue: "$100", pct: "", active: "false", when: "2020-12-30" }
+];
+
+console.log(getSchema(rows));
+console.log(dataFormat(rows, { reportIgnored: true }));
+```
+
+### toJSONSchema(schemaOrRows, options?)
+
+Generate a JSON Schema (draft 2020-12) from a schema array or directly from rows (in which case `getSchema` runs first).
+
+- If column `type` is `Number`, maps to `number` (or `integer` for `format: "Integer"`). Includes `minimum`/`maximum` when available.
+- `Boolean` maps to `boolean`.
+- `Date` maps to `string` with hints:
+  - `%Y` → `pattern: ^(?:18|19|20|21)\d{2}$`
+  - `%Y-%m-%d` or `%Y/%m/%d` → `format: date`
+  - date-time forms with `%H`/`%I` → `format: date-time`
+- `String` columns include `minLength`/`maxLength` from text stats when available; `Financial year` adds a pattern.
+- Columns with `completeness === 1` are marked as `required`.
+
+Example:
+
+```js
+import { getSchema, toJSONSchema, dataFormat } from '@andyball/schema-forge';
+
+const rows = [ { id: 1, name: 'Alice' }, { id: 2, name: 'Bob' } ];
+const schema = getSchema(rows);
+const jsonSchema = toJSONSchema(schema);
+const wrangleData = dataFormat(rows)
+```
+
+### What is JSON Schema (draft 2020-12)?
+
+**JSON Schema** is a standard, machine-readable vocabulary for describing the shape and constraints of JSON data. It lets you specify what properties exist, their types, value ranges, string patterns, required fields, and more. Tools can then validate data against a schema, generate forms and UI, scaffold types, and power API contracts.
+
+- **Validation**: Check that incoming/outgoing JSON matches the expected structure before processing.
+- **Interoperability**: Share schemas across services, clients, and pipelines as a single source of truth.
+- **Tooling ecosystem**: Works with validators (e.g., AJV), documentation generators, code generators, and form builders.
+- **Draft 2020-12**: A widely adopted version of the JSON Schema specification with improved features and semantics.
+
+Learn more at the official site: [json-schema.org](https://json-schema.org).
+
+## CLI-like local test
+
+Run the built-in example:
+
+```bash
+npm run example
+```
+
+## Development
+
+Install dev deps and build:
+
+```bash
+npm i -D typescript
+npm run build
+```
+
+Run a quick test (after build):
+
+```bash
+npm test
+```
+
+## Publish
+
+1. Update `package.json` fields (`name`, `description`, `author`, `keywords`).
+2. Login: `npm login`
+3. Publish: `npm publish --access public`

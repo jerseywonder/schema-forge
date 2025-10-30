@@ -1,6 +1,6 @@
 {
   "name": "@andyball/schema-forge",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A npm package which does two things: returns a schema for a dataset, and returns a formated version of a dataset based on its schema.",
   "license": "MIT",
   "author": "Andy Ball",
