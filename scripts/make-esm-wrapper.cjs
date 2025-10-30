@@ -8,6 +8,7 @@ fs.mkdirSync(distDir, { recursive: true });
 const esm = `import cjs from './index.js';
 export const getSchema = cjs.getSchema;
 export const dataFormat = cjs.dataFormat;
+export const toJSONSchema = cjs.toJSONSchema;
 export default cjs;
 `;
 
