@@ -1,2041 +1,2041 @@
 [
   {
     "unix": 1741392000,
-    "datetime": "2025-03-08 00:00:00",
+    "datetime": "2025-03-07T13:00:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741392600,
-    "datetime": "2025-03-08 00:10:00",
+    "datetime": "2025-03-07T13:10:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741393200,
-    "datetime": "2025-03-08 00:20:00",
+    "datetime": "2025-03-07T13:20:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741393800,
-    "datetime": "2025-03-08 00:30:00",
+    "datetime": "2025-03-07T13:30:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741394400,
-    "datetime": "2025-03-08 00:40:00",
+    "datetime": "2025-03-07T13:40:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741395000,
-    "datetime": "2025-03-08 00:50:00",
+    "datetime": "2025-03-07T13:50:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741395600,
-    "datetime": "2025-03-08 01:00:00",
+    "datetime": "2025-03-07T14:00:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741396200,
-    "datetime": "2025-03-08 01:10:00",
+    "datetime": "2025-03-07T14:10:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741396800,
-    "datetime": "2025-03-08 01:20:00",
+    "datetime": "2025-03-07T14:20:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741397400,
-    "datetime": "2025-03-08 01:30:00",
+    "datetime": "2025-03-07T14:30:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741398000,
-    "datetime": "2025-03-08 01:40:00",
+    "datetime": "2025-03-07T14:40:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741398600,
-    "datetime": "2025-03-08 01:50:00",
+    "datetime": "2025-03-07T14:50:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741399200,
-    "datetime": "2025-03-08 02:00:00",
+    "datetime": "2025-03-07T15:00:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741399800,
-    "datetime": "2025-03-08 02:10:00",
+    "datetime": "2025-03-07T15:10:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741400400,
-    "datetime": "2025-03-08 02:20:00",
+    "datetime": "2025-03-07T15:20:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741401000,
-    "datetime": "2025-03-08 02:30:00",
+    "datetime": "2025-03-07T15:30:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741401600,
-    "datetime": "2025-03-08 02:40:00",
+    "datetime": "2025-03-07T15:40:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741402200,
-    "datetime": "2025-03-08 02:50:00",
+    "datetime": "2025-03-07T15:50:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741402800,
-    "datetime": "2025-03-08 03:00:00",
+    "datetime": "2025-03-07T16:00:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741403400,
-    "datetime": "2025-03-08 03:10:00",
+    "datetime": "2025-03-07T16:10:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741404000,
-    "datetime": "2025-03-08 03:20:00",
+    "datetime": "2025-03-07T16:20:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741404600,
-    "datetime": "2025-03-08 03:30:00",
+    "datetime": "2025-03-07T16:30:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741405200,
-    "datetime": "2025-03-08 03:40:00",
+    "datetime": "2025-03-07T16:40:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741405800,
-    "datetime": "2025-03-08 03:50:00",
+    "datetime": "2025-03-07T16:50:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741406400,
-    "datetime": "2025-03-08 04:00:00",
+    "datetime": "2025-03-07T17:00:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741407000,
-    "datetime": "2025-03-08 04:10:00",
+    "datetime": "2025-03-07T17:10:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741407600,
-    "datetime": "2025-03-08 04:20:00",
+    "datetime": "2025-03-07T17:20:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741408200,
-    "datetime": "2025-03-08 04:30:00",
+    "datetime": "2025-03-07T17:30:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741408800,
-    "datetime": "2025-03-08 04:40:00",
+    "datetime": "2025-03-07T17:40:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741409400,
-    "datetime": "2025-03-08 04:50:00",
+    "datetime": "2025-03-07T17:50:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741410000,
-    "datetime": "2025-03-08 05:00:00",
+    "datetime": "2025-03-07T18:00:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741410600,
-    "datetime": "2025-03-08 05:10:00",
+    "datetime": "2025-03-07T18:10:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741411200,
-    "datetime": "2025-03-08 05:20:00",
+    "datetime": "2025-03-07T18:20:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741411800,
-    "datetime": "2025-03-08 05:30:00",
+    "datetime": "2025-03-07T18:30:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741412400,
-    "datetime": "2025-03-08 05:40:00",
+    "datetime": "2025-03-07T18:40:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741413000,
-    "datetime": "2025-03-08 05:50:00",
+    "datetime": "2025-03-07T18:50:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741413600,
-    "datetime": "2025-03-08 06:00:00",
+    "datetime": "2025-03-07T19:00:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741414200,
-    "datetime": "2025-03-08 06:10:00",
+    "datetime": "2025-03-07T19:10:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741414800,
-    "datetime": "2025-03-08 06:20:00",
+    "datetime": "2025-03-07T19:20:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741415400,
-    "datetime": "2025-03-08 06:30:00",
+    "datetime": "2025-03-07T19:30:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741416000,
-    "datetime": "2025-03-08 06:40:00",
+    "datetime": "2025-03-07T19:40:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741416600,
-    "datetime": "2025-03-08 06:50:00",
+    "datetime": "2025-03-07T19:50:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741417200,
-    "datetime": "2025-03-08 07:00:00",
+    "datetime": "2025-03-07T20:00:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741417800,
-    "datetime": "2025-03-08 07:10:00",
+    "datetime": "2025-03-07T20:10:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741418400,
-    "datetime": "2025-03-08 07:20:00",
+    "datetime": "2025-03-07T20:20:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741419000,
-    "datetime": "2025-03-08 07:30:00",
+    "datetime": "2025-03-07T20:30:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741419600,
-    "datetime": "2025-03-08 07:40:00",
+    "datetime": "2025-03-07T20:40:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741420200,
-    "datetime": "2025-03-08 07:50:00",
+    "datetime": "2025-03-07T20:50:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741420800,
-    "datetime": "2025-03-08 08:00:00",
+    "datetime": "2025-03-07T21:00:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741421400,
-    "datetime": "2025-03-08 08:10:00",
+    "datetime": "2025-03-07T21:10:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741422000,
-    "datetime": "2025-03-08 08:20:00",
+    "datetime": "2025-03-07T21:20:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741422600,
-    "datetime": "2025-03-08 08:30:00",
+    "datetime": "2025-03-07T21:30:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741423200,
-    "datetime": "2025-03-08 08:40:00",
+    "datetime": "2025-03-07T21:40:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741423800,
-    "datetime": "2025-03-08 08:50:00",
+    "datetime": "2025-03-07T21:50:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741424400,
-    "datetime": "2025-03-08 09:00:00",
+    "datetime": "2025-03-07T22:00:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741425000,
-    "datetime": "2025-03-08 09:10:00",
+    "datetime": "2025-03-07T22:10:00.000Z",
     "speed": 16.7,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741425600,
-    "datetime": "2025-03-08 09:20:00",
+    "datetime": "2025-03-07T22:20:00.000Z",
     "speed": 14.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741426200,
-    "datetime": "2025-03-08 09:30:00",
+    "datetime": "2025-03-07T22:30:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741426800,
-    "datetime": "2025-03-08 09:40:00",
+    "datetime": "2025-03-07T22:40:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741427400,
-    "datetime": "2025-03-08 09:50:00",
+    "datetime": "2025-03-07T22:50:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741428000,
-    "datetime": "2025-03-08 10:00:00",
+    "datetime": "2025-03-07T23:00:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741428600,
-    "datetime": "2025-03-08 10:10:00",
+    "datetime": "2025-03-07T23:10:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741429200,
-    "datetime": "2025-03-08 10:20:00",
+    "datetime": "2025-03-07T23:20:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741429800,
-    "datetime": "2025-03-08 10:30:00",
+    "datetime": "2025-03-07T23:30:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741430400,
-    "datetime": "2025-03-08 10:40:00",
+    "datetime": "2025-03-07T23:40:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741431000,
-    "datetime": "2025-03-08 10:50:00",
+    "datetime": "2025-03-07T23:50:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741431600,
-    "datetime": "2025-03-08 11:00:00",
+    "datetime": "2025-03-08T00:00:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741432200,
-    "datetime": "2025-03-08 11:10:00",
+    "datetime": "2025-03-08T00:10:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741432800,
-    "datetime": "2025-03-08 11:20:00",
+    "datetime": "2025-03-08T00:20:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741433400,
-    "datetime": "2025-03-08 11:30:00",
+    "datetime": "2025-03-08T00:30:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741434000,
-    "datetime": "2025-03-08 11:40:00",
+    "datetime": "2025-03-08T00:40:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741434600,
-    "datetime": "2025-03-08 11:50:00",
+    "datetime": "2025-03-08T00:50:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741435200,
-    "datetime": "2025-03-08 12:00:00",
+    "datetime": "2025-03-08T01:00:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741435800,
-    "datetime": "2025-03-08 12:10:00",
+    "datetime": "2025-03-08T01:10:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741436400,
-    "datetime": "2025-03-08 12:20:00",
+    "datetime": "2025-03-08T01:20:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741437000,
-    "datetime": "2025-03-08 12:30:00",
+    "datetime": "2025-03-08T01:30:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741437600,
-    "datetime": "2025-03-08 12:40:00",
+    "datetime": "2025-03-08T01:40:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741438200,
-    "datetime": "2025-03-08 12:50:00",
+    "datetime": "2025-03-08T01:50:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741438800,
-    "datetime": "2025-03-08 13:00:00",
+    "datetime": "2025-03-08T02:00:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741439400,
-    "datetime": "2025-03-08 13:10:00",
+    "datetime": "2025-03-08T02:10:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741440000,
-    "datetime": "2025-03-08 13:20:00",
+    "datetime": "2025-03-08T02:20:00.000Z",
     "speed": 16.7,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741440600,
-    "datetime": "2025-03-08 13:30:00",
+    "datetime": "2025-03-08T02:30:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741441200,
-    "datetime": "2025-03-08 13:40:00",
+    "datetime": "2025-03-08T02:40:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741441800,
-    "datetime": "2025-03-08 13:50:00",
+    "datetime": "2025-03-08T02:50:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741442400,
-    "datetime": "2025-03-08 14:00:00",
+    "datetime": "2025-03-08T03:00:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741443000,
-    "datetime": "2025-03-08 14:10:00",
+    "datetime": "2025-03-08T03:10:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741443600,
-    "datetime": "2025-03-08 14:20:00",
+    "datetime": "2025-03-08T03:20:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741444200,
-    "datetime": "2025-03-08 14:30:00",
+    "datetime": "2025-03-08T03:30:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741444800,
-    "datetime": "2025-03-08 14:40:00",
+    "datetime": "2025-03-08T03:40:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741445400,
-    "datetime": "2025-03-08 14:50:00",
+    "datetime": "2025-03-08T03:50:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741446000,
-    "datetime": "2025-03-08 15:00:00",
+    "datetime": "2025-03-08T04:00:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741446600,
-    "datetime": "2025-03-08 15:10:00",
+    "datetime": "2025-03-08T04:10:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741447200,
-    "datetime": "2025-03-08 15:20:00",
+    "datetime": "2025-03-08T04:20:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741447800,
-    "datetime": "2025-03-08 15:30:00",
+    "datetime": "2025-03-08T04:30:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741448400,
-    "datetime": "2025-03-08 15:40:00",
+    "datetime": "2025-03-08T04:40:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741449000,
-    "datetime": "2025-03-08 15:50:00",
+    "datetime": "2025-03-08T04:50:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741449600,
-    "datetime": "2025-03-08 16:00:00",
+    "datetime": "2025-03-08T05:00:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741450200,
-    "datetime": "2025-03-08 16:10:00",
+    "datetime": "2025-03-08T05:10:00.000Z",
     "speed": 16.7,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741450800,
-    "datetime": "2025-03-08 16:20:00",
+    "datetime": "2025-03-08T05:20:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741451400,
-    "datetime": "2025-03-08 16:30:00",
+    "datetime": "2025-03-08T05:30:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741452000,
-    "datetime": "2025-03-08 16:40:00",
+    "datetime": "2025-03-08T05:40:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741452600,
-    "datetime": "2025-03-08 16:50:00",
+    "datetime": "2025-03-08T05:50:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741453200,
-    "datetime": "2025-03-08 17:00:00",
+    "datetime": "2025-03-08T06:00:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741453800,
-    "datetime": "2025-03-08 17:10:00",
+    "datetime": "2025-03-08T06:10:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741454400,
-    "datetime": "2025-03-08 17:20:00",
+    "datetime": "2025-03-08T06:20:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741455000,
-    "datetime": "2025-03-08 17:30:00",
+    "datetime": "2025-03-08T06:30:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741455600,
-    "datetime": "2025-03-08 17:40:00",
+    "datetime": "2025-03-08T06:40:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741456200,
-    "datetime": "2025-03-08 17:50:00",
+    "datetime": "2025-03-08T06:50:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741456800,
-    "datetime": "2025-03-08 18:00:00",
+    "datetime": "2025-03-08T07:00:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741457400,
-    "datetime": "2025-03-08 18:10:00",
+    "datetime": "2025-03-08T07:10:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741458000,
-    "datetime": "2025-03-08 18:20:00",
+    "datetime": "2025-03-08T07:20:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741458600,
-    "datetime": "2025-03-08 18:30:00",
+    "datetime": "2025-03-08T07:30:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741459200,
-    "datetime": "2025-03-08 18:40:00",
+    "datetime": "2025-03-08T07:40:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741459800,
-    "datetime": "2025-03-08 18:50:00",
+    "datetime": "2025-03-08T07:50:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741460400,
-    "datetime": "2025-03-08 19:00:00",
+    "datetime": "2025-03-08T08:00:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741461000,
-    "datetime": "2025-03-08 19:10:00",
+    "datetime": "2025-03-08T08:10:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741461600,
-    "datetime": "2025-03-08 19:20:00",
+    "datetime": "2025-03-08T08:20:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741462200,
-    "datetime": "2025-03-08 19:30:00",
+    "datetime": "2025-03-08T08:30:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741462800,
-    "datetime": "2025-03-08 19:40:00",
+    "datetime": "2025-03-08T08:40:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741463400,
-    "datetime": "2025-03-08 19:50:00",
+    "datetime": "2025-03-08T08:50:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741464000,
-    "datetime": "2025-03-08 20:00:00",
+    "datetime": "2025-03-08T09:00:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741464600,
-    "datetime": "2025-03-08 20:10:00",
+    "datetime": "2025-03-08T09:10:00.000Z",
     "speed": 24.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741465200,
-    "datetime": "2025-03-08 20:20:00",
+    "datetime": "2025-03-08T09:20:00.000Z",
     "speed": 22.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741465800,
-    "datetime": "2025-03-08 20:30:00",
+    "datetime": "2025-03-08T09:30:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741466400,
-    "datetime": "2025-03-08 20:40:00",
+    "datetime": "2025-03-08T09:40:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741467000,
-    "datetime": "2025-03-08 20:50:00",
+    "datetime": "2025-03-08T09:50:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741467600,
-    "datetime": "2025-03-08 21:00:00",
+    "datetime": "2025-03-08T10:00:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741468200,
-    "datetime": "2025-03-08 21:10:00",
+    "datetime": "2025-03-08T10:10:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741468800,
-    "datetime": "2025-03-08 21:20:00",
+    "datetime": "2025-03-08T10:20:00.000Z",
     "speed": 16.7,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741469400,
-    "datetime": "2025-03-08 21:30:00",
+    "datetime": "2025-03-08T10:30:00.000Z",
     "speed": 16.7,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741470000,
-    "datetime": "2025-03-08 21:40:00",
+    "datetime": "2025-03-08T10:40:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741470600,
-    "datetime": "2025-03-08 21:50:00",
+    "datetime": "2025-03-08T10:50:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741471200,
-    "datetime": "2025-03-08 22:00:00",
+    "datetime": "2025-03-08T11:00:00.000Z",
     "speed": 20.4,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741471800,
-    "datetime": "2025-03-08 22:10:00",
+    "datetime": "2025-03-08T11:10:00.000Z",
     "speed": 18.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741472400,
-    "datetime": "2025-03-08 22:20:00",
+    "datetime": "2025-03-08T11:20:00.000Z",
     "speed": 14.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741473000,
-    "datetime": "2025-03-08 22:30:00",
+    "datetime": "2025-03-08T11:30:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741473600,
-    "datetime": "2025-03-08 22:40:00",
+    "datetime": "2025-03-08T11:40:00.000Z",
     "speed": 14.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741474200,
-    "datetime": "2025-03-08 22:50:00",
+    "datetime": "2025-03-08T11:50:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741474800,
-    "datetime": "2025-03-08 23:00:00",
+    "datetime": "2025-03-08T12:00:00.000Z",
     "speed": 14.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741475400,
-    "datetime": "2025-03-08 23:10:00",
+    "datetime": "2025-03-08T12:10:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741476000,
-    "datetime": "2025-03-08 23:20:00",
+    "datetime": "2025-03-08T12:20:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741476600,
-    "datetime": "2025-03-08 23:30:00",
+    "datetime": "2025-03-08T12:30:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741477200,
-    "datetime": "2025-03-08 23:40:00",
+    "datetime": "2025-03-08T12:40:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741477800,
-    "datetime": "2025-03-08 23:50:00",
+    "datetime": "2025-03-08T12:50:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741478400,
-    "datetime": "2025-03-09 00:00:00",
+    "datetime": "2025-03-08T13:00:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741479000,
-    "datetime": "2025-03-09 00:10:00",
+    "datetime": "2025-03-08T13:10:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741479600,
-    "datetime": "2025-03-09 00:20:00",
+    "datetime": "2025-03-08T13:20:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741480200,
-    "datetime": "2025-03-09 00:30:00",
+    "datetime": "2025-03-08T13:30:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741480800,
-    "datetime": "2025-03-09 00:40:00",
+    "datetime": "2025-03-08T13:40:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741481400,
-    "datetime": "2025-03-09 00:50:00",
+    "datetime": "2025-03-08T13:50:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741482000,
-    "datetime": "2025-03-09 01:00:00",
+    "datetime": "2025-03-08T14:00:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741482600,
-    "datetime": "2025-03-09 01:10:00",
+    "datetime": "2025-03-08T14:10:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741483200,
-    "datetime": "2025-03-09 01:20:00",
+    "datetime": "2025-03-08T14:20:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741483800,
-    "datetime": "2025-03-09 01:30:00",
+    "datetime": "2025-03-08T14:30:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741484400,
-    "datetime": "2025-03-09 01:40:00",
+    "datetime": "2025-03-08T14:40:00.000Z",
     "speed": 9.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741485000,
-    "datetime": "2025-03-09 01:50:00",
+    "datetime": "2025-03-08T14:50:00.000Z",
     "speed": 9.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741485600,
-    "datetime": "2025-03-09 02:00:00",
+    "datetime": "2025-03-08T15:00:00.000Z",
     "speed": 11.1,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741486200,
-    "datetime": "2025-03-09 02:10:00",
+    "datetime": "2025-03-08T15:10:00.000Z",
     "speed": 9.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741486800,
-    "datetime": "2025-03-09 02:20:00",
+    "datetime": "2025-03-08T15:20:00.000Z",
     "speed": 13,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741487400,
-    "datetime": "2025-03-09 02:30:00",
+    "datetime": "2025-03-08T15:30:00.000Z",
     "speed": 14.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741488000,
-    "datetime": "2025-03-09 02:40:00",
+    "datetime": "2025-03-08T15:40:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741488600,
-    "datetime": "2025-03-09 02:50:00",
+    "datetime": "2025-03-08T15:50:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741489200,
-    "datetime": "2025-03-09 03:00:00",
+    "datetime": "2025-03-08T16:00:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741489800,
-    "datetime": "2025-03-09 03:10:00",
+    "datetime": "2025-03-08T16:10:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741490400,
-    "datetime": "2025-03-09 03:20:00",
+    "datetime": "2025-03-08T16:20:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741491000,
-    "datetime": "2025-03-09 03:30:00",
+    "datetime": "2025-03-08T16:30:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741491600,
-    "datetime": "2025-03-09 03:40:00",
+    "datetime": "2025-03-08T16:40:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741492200,
-    "datetime": "2025-03-09 03:50:00",
+    "datetime": "2025-03-08T16:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741492800,
-    "datetime": "2025-03-09 04:00:00",
+    "datetime": "2025-03-08T17:00:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741493400,
-    "datetime": "2025-03-09 04:10:00",
+    "datetime": "2025-03-08T17:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741494000,
-    "datetime": "2025-03-09 04:20:00",
+    "datetime": "2025-03-08T17:20:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741494600,
-    "datetime": "2025-03-09 04:30:00",
+    "datetime": "2025-03-08T17:30:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741495200,
-    "datetime": "2025-03-09 04:40:00",
+    "datetime": "2025-03-08T17:40:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741495800,
-    "datetime": "2025-03-09 04:50:00",
+    "datetime": "2025-03-08T17:50:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741496400,
-    "datetime": "2025-03-09 05:00:00",
+    "datetime": "2025-03-08T18:00:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741497000,
-    "datetime": "2025-03-09 05:10:00",
+    "datetime": "2025-03-08T18:10:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741497600,
-    "datetime": "2025-03-09 05:20:00",
+    "datetime": "2025-03-08T18:20:00.000Z",
     "speed": 46.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741498200,
-    "datetime": "2025-03-09 05:30:00",
+    "datetime": "2025-03-08T18:30:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741498800,
-    "datetime": "2025-03-09 05:40:00",
+    "datetime": "2025-03-08T18:40:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741499400,
-    "datetime": "2025-03-09 05:50:00",
+    "datetime": "2025-03-08T18:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741500000,
-    "datetime": "2025-03-09 06:00:00",
+    "datetime": "2025-03-08T19:00:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741500600,
-    "datetime": "2025-03-09 06:10:00",
+    "datetime": "2025-03-08T19:10:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741501200,
-    "datetime": "2025-03-09 06:20:00",
+    "datetime": "2025-03-08T19:20:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741501800,
-    "datetime": "2025-03-09 06:30:00",
+    "datetime": "2025-03-08T19:30:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741502400,
-    "datetime": "2025-03-09 06:40:00",
+    "datetime": "2025-03-08T19:40:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741503000,
-    "datetime": "2025-03-09 06:50:00",
+    "datetime": "2025-03-08T19:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741503600,
-    "datetime": "2025-03-09 07:00:00",
+    "datetime": "2025-03-08T20:00:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741504200,
-    "datetime": "2025-03-09 07:10:00",
+    "datetime": "2025-03-08T20:10:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741504800,
-    "datetime": "2025-03-09 07:20:00",
+    "datetime": "2025-03-08T20:20:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741505400,
-    "datetime": "2025-03-09 07:30:00",
+    "datetime": "2025-03-08T20:30:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741506000,
-    "datetime": "2025-03-09 07:40:00",
+    "datetime": "2025-03-08T20:40:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741506600,
-    "datetime": "2025-03-09 07:50:00",
+    "datetime": "2025-03-08T20:50:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741507200,
-    "datetime": "2025-03-09 08:00:00",
+    "datetime": "2025-03-08T21:00:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741507800,
-    "datetime": "2025-03-09 08:10:00",
+    "datetime": "2025-03-08T21:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741508400,
-    "datetime": "2025-03-09 08:20:00",
+    "datetime": "2025-03-08T21:20:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741509000,
-    "datetime": "2025-03-09 08:30:00",
+    "datetime": "2025-03-08T21:30:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741509600,
-    "datetime": "2025-03-09 08:40:00",
+    "datetime": "2025-03-08T21:40:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741510200,
-    "datetime": "2025-03-09 08:50:00",
+    "datetime": "2025-03-08T21:50:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741510800,
-    "datetime": "2025-03-09 09:00:00",
+    "datetime": "2025-03-08T22:00:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741511400,
-    "datetime": "2025-03-09 09:10:00",
+    "datetime": "2025-03-08T22:10:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741512000,
-    "datetime": "2025-03-09 09:20:00",
+    "datetime": "2025-03-08T22:20:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741512600,
-    "datetime": "2025-03-09 09:30:00",
+    "datetime": "2025-03-08T22:30:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741513200,
-    "datetime": "2025-03-09 09:40:00",
+    "datetime": "2025-03-08T22:40:00.000Z",
     "speed": 51.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741513800,
-    "datetime": "2025-03-09 09:50:00",
+    "datetime": "2025-03-08T22:50:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741514400,
-    "datetime": "2025-03-09 10:00:00",
+    "datetime": "2025-03-08T23:00:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741515000,
-    "datetime": "2025-03-09 10:10:00",
+    "datetime": "2025-03-08T23:10:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741515600,
-    "datetime": "2025-03-09 10:20:00",
+    "datetime": "2025-03-08T23:20:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741516200,
-    "datetime": "2025-03-09 10:30:00",
+    "datetime": "2025-03-08T23:30:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741516800,
-    "datetime": "2025-03-09 10:40:00",
+    "datetime": "2025-03-08T23:40:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741517400,
-    "datetime": "2025-03-09 10:50:00",
+    "datetime": "2025-03-08T23:50:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741518000,
-    "datetime": "2025-03-09 11:00:00",
+    "datetime": "2025-03-09T00:00:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741518600,
-    "datetime": "2025-03-09 11:10:00",
+    "datetime": "2025-03-09T00:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741519200,
-    "datetime": "2025-03-09 11:20:00",
+    "datetime": "2025-03-09T00:20:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741519800,
-    "datetime": "2025-03-09 11:30:00",
+    "datetime": "2025-03-09T00:30:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741520400,
-    "datetime": "2025-03-09 11:40:00",
+    "datetime": "2025-03-09T00:40:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741521000,
-    "datetime": "2025-03-09 11:50:00",
+    "datetime": "2025-03-09T00:50:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741521600,
-    "datetime": "2025-03-09 12:00:00",
+    "datetime": "2025-03-09T01:00:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741522200,
-    "datetime": "2025-03-09 12:10:00",
+    "datetime": "2025-03-09T01:10:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741522800,
-    "datetime": "2025-03-09 12:20:00",
+    "datetime": "2025-03-09T01:20:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741523400,
-    "datetime": "2025-03-09 12:30:00",
+    "datetime": "2025-03-09T01:30:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741524000,
-    "datetime": "2025-03-09 12:40:00",
+    "datetime": "2025-03-09T01:40:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741524600,
-    "datetime": "2025-03-09 12:50:00",
+    "datetime": "2025-03-09T01:50:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741525200,
-    "datetime": "2025-03-09 13:00:00",
+    "datetime": "2025-03-09T02:00:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741525800,
-    "datetime": "2025-03-09 13:10:00",
+    "datetime": "2025-03-09T02:10:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741526400,
-    "datetime": "2025-03-09 13:20:00",
+    "datetime": "2025-03-09T02:20:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741527000,
-    "datetime": "2025-03-09 13:30:00",
+    "datetime": "2025-03-09T02:30:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741527600,
-    "datetime": "2025-03-09 13:40:00",
+    "datetime": "2025-03-09T02:40:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741528200,
-    "datetime": "2025-03-09 13:50:00",
+    "datetime": "2025-03-09T02:50:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741528800,
-    "datetime": "2025-03-09 14:00:00",
+    "datetime": "2025-03-09T03:00:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741529400,
-    "datetime": "2025-03-09 14:10:00",
+    "datetime": "2025-03-09T03:10:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741530000,
-    "datetime": "2025-03-09 14:20:00",
+    "datetime": "2025-03-09T03:20:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741530600,
-    "datetime": "2025-03-09 14:30:00",
+    "datetime": "2025-03-09T03:30:00.000Z",
     "speed": 25.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741531200,
-    "datetime": "2025-03-09 14:40:00",
+    "datetime": "2025-03-09T03:40:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741531800,
-    "datetime": "2025-03-09 14:50:00",
+    "datetime": "2025-03-09T03:50:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741532400,
-    "datetime": "2025-03-09 15:00:00",
+    "datetime": "2025-03-09T04:00:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741533000,
-    "datetime": "2025-03-09 15:10:00",
+    "datetime": "2025-03-09T04:10:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741533600,
-    "datetime": "2025-03-09 15:20:00",
+    "datetime": "2025-03-09T04:20:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741534200,
-    "datetime": "2025-03-09 15:30:00",
+    "datetime": "2025-03-09T04:30:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741534800,
-    "datetime": "2025-03-09 15:40:00",
+    "datetime": "2025-03-09T04:40:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741535400,
-    "datetime": "2025-03-09 15:50:00",
+    "datetime": "2025-03-09T04:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741536000,
-    "datetime": "2025-03-09 16:00:00",
+    "datetime": "2025-03-09T05:00:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741536600,
-    "datetime": "2025-03-09 16:10:00",
+    "datetime": "2025-03-09T05:10:00.000Z",
     "speed": 46.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741537200,
-    "datetime": "2025-03-09 16:20:00",
+    "datetime": "2025-03-09T05:20:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741537800,
-    "datetime": "2025-03-09 16:30:00",
+    "datetime": "2025-03-09T05:30:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741538400,
-    "datetime": "2025-03-09 16:40:00",
+    "datetime": "2025-03-09T05:40:00.000Z",
     "speed": 48.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741539000,
-    "datetime": "2025-03-09 16:50:00",
+    "datetime": "2025-03-09T05:50:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741539600,
-    "datetime": "2025-03-09 17:00:00",
+    "datetime": "2025-03-09T06:00:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741540200,
-    "datetime": "2025-03-09 17:10:00",
+    "datetime": "2025-03-09T06:10:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741540800,
-    "datetime": "2025-03-09 17:20:00",
+    "datetime": "2025-03-09T06:20:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741541400,
-    "datetime": "2025-03-09 17:30:00",
+    "datetime": "2025-03-09T06:30:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741542000,
-    "datetime": "2025-03-09 17:40:00",
+    "datetime": "2025-03-09T06:40:00.000Z",
     "speed": 46.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741542600,
-    "datetime": "2025-03-09 17:50:00",
+    "datetime": "2025-03-09T06:50:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741543200,
-    "datetime": "2025-03-09 18:00:00",
+    "datetime": "2025-03-09T07:00:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741543800,
-    "datetime": "2025-03-09 18:10:00",
+    "datetime": "2025-03-09T07:10:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741544400,
-    "datetime": "2025-03-09 18:20:00",
+    "datetime": "2025-03-09T07:20:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741545000,
-    "datetime": "2025-03-09 18:30:00",
+    "datetime": "2025-03-09T07:30:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741545600,
-    "datetime": "2025-03-09 18:40:00",
+    "datetime": "2025-03-09T07:40:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741546200,
-    "datetime": "2025-03-09 18:50:00",
+    "datetime": "2025-03-09T07:50:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741546800,
-    "datetime": "2025-03-09 19:00:00",
+    "datetime": "2025-03-09T08:00:00.000Z",
     "speed": 46.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741547400,
-    "datetime": "2025-03-09 19:10:00",
+    "datetime": "2025-03-09T08:10:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741548000,
-    "datetime": "2025-03-09 19:20:00",
+    "datetime": "2025-03-09T08:20:00.000Z",
     "speed": 48.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741548600,
-    "datetime": "2025-03-09 19:30:00",
+    "datetime": "2025-03-09T08:30:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741549200,
-    "datetime": "2025-03-09 19:40:00",
+    "datetime": "2025-03-09T08:40:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741549800,
-    "datetime": "2025-03-09 19:50:00",
+    "datetime": "2025-03-09T08:50:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741550400,
-    "datetime": "2025-03-09 20:00:00",
+    "datetime": "2025-03-09T09:00:00.000Z",
     "speed": 46.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741551000,
-    "datetime": "2025-03-09 20:10:00",
+    "datetime": "2025-03-09T09:10:00.000Z",
     "speed": 46.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741551600,
-    "datetime": "2025-03-09 20:20:00",
+    "datetime": "2025-03-09T09:20:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741552200,
-    "datetime": "2025-03-09 20:30:00",
+    "datetime": "2025-03-09T09:30:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741552800,
-    "datetime": "2025-03-09 20:40:00",
+    "datetime": "2025-03-09T09:40:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741553400,
-    "datetime": "2025-03-09 20:50:00",
+    "datetime": "2025-03-09T09:50:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741554000,
-    "datetime": "2025-03-09 21:00:00",
+    "datetime": "2025-03-09T10:00:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741554600,
-    "datetime": "2025-03-09 21:10:00",
+    "datetime": "2025-03-09T10:10:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741555200,
-    "datetime": "2025-03-09 21:20:00",
+    "datetime": "2025-03-09T10:20:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741555800,
-    "datetime": "2025-03-09 21:30:00",
+    "datetime": "2025-03-09T10:30:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741556400,
-    "datetime": "2025-03-09 21:40:00",
+    "datetime": "2025-03-09T10:40:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741557000,
-    "datetime": "2025-03-09 21:50:00",
+    "datetime": "2025-03-09T10:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741557600,
-    "datetime": "2025-03-09 22:00:00",
+    "datetime": "2025-03-09T11:00:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741558200,
-    "datetime": "2025-03-09 22:10:00",
+    "datetime": "2025-03-09T11:10:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741558800,
-    "datetime": "2025-03-09 22:20:00",
+    "datetime": "2025-03-09T11:20:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741559400,
-    "datetime": "2025-03-09 22:30:00",
+    "datetime": "2025-03-09T11:30:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741560000,
-    "datetime": "2025-03-09 22:40:00",
+    "datetime": "2025-03-09T11:40:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741560600,
-    "datetime": "2025-03-09 22:50:00",
+    "datetime": "2025-03-09T11:50:00.000Z",
     "speed": 29.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741561200,
-    "datetime": "2025-03-09 23:00:00",
+    "datetime": "2025-03-09T12:00:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741561800,
-    "datetime": "2025-03-09 23:10:00",
+    "datetime": "2025-03-09T12:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741562400,
-    "datetime": "2025-03-09 23:20:00",
+    "datetime": "2025-03-09T12:20:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741563000,
-    "datetime": "2025-03-09 23:30:00",
+    "datetime": "2025-03-09T12:30:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741563600,
-    "datetime": "2025-03-09 23:40:00",
+    "datetime": "2025-03-09T12:40:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741564200,
-    "datetime": "2025-03-09 23:50:00",
+    "datetime": "2025-03-09T12:50:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741564800,
-    "datetime": "2025-03-10 00:00:00",
+    "datetime": "2025-03-09T13:00:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741565400,
-    "datetime": "2025-03-10 00:10:00",
+    "datetime": "2025-03-09T13:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741566000,
-    "datetime": "2025-03-10 00:20:00",
+    "datetime": "2025-03-09T13:20:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741566600,
-    "datetime": "2025-03-10 00:30:00",
+    "datetime": "2025-03-09T13:30:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741567200,
-    "datetime": "2025-03-10 00:40:00",
+    "datetime": "2025-03-09T13:40:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741567800,
-    "datetime": "2025-03-10 00:50:00",
+    "datetime": "2025-03-09T13:50:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741568400,
-    "datetime": "2025-03-10 01:00:00",
+    "datetime": "2025-03-09T14:00:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741569000,
-    "datetime": "2025-03-10 01:10:00",
+    "datetime": "2025-03-09T14:10:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741569600,
-    "datetime": "2025-03-10 01:20:00",
+    "datetime": "2025-03-09T14:20:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741570200,
-    "datetime": "2025-03-10 01:30:00",
+    "datetime": "2025-03-09T14:30:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741570800,
-    "datetime": "2025-03-10 01:40:00",
+    "datetime": "2025-03-09T14:40:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741571400,
-    "datetime": "2025-03-10 01:50:00",
+    "datetime": "2025-03-09T14:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741572000,
-    "datetime": "2025-03-10 02:00:00",
+    "datetime": "2025-03-09T15:00:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741572600,
-    "datetime": "2025-03-10 02:10:00",
+    "datetime": "2025-03-09T15:10:00.000Z",
     "speed": 44.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741573200,
-    "datetime": "2025-03-10 02:20:00",
+    "datetime": "2025-03-09T15:20:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741573800,
-    "datetime": "2025-03-10 02:30:00",
+    "datetime": "2025-03-09T15:30:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741574400,
-    "datetime": "2025-03-10 02:40:00",
+    "datetime": "2025-03-09T15:40:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741575000,
-    "datetime": "2025-03-10 02:50:00",
+    "datetime": "2025-03-09T15:50:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741575600,
-    "datetime": "2025-03-10 03:00:00",
+    "datetime": "2025-03-09T16:00:00.000Z",
     "speed": 42.6,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741576200,
-    "datetime": "2025-03-10 03:10:00",
+    "datetime": "2025-03-09T16:10:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741576800,
-    "datetime": "2025-03-10 03:20:00",
+    "datetime": "2025-03-09T16:20:00.000Z",
     "speed": 40.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741577400,
-    "datetime": "2025-03-10 03:30:00",
+    "datetime": "2025-03-09T16:30:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741578000,
-    "datetime": "2025-03-10 03:40:00",
+    "datetime": "2025-03-09T16:40:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741578600,
-    "datetime": "2025-03-10 03:50:00",
+    "datetime": "2025-03-09T16:50:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741579200,
-    "datetime": "2025-03-10 04:00:00",
+    "datetime": "2025-03-09T17:00:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741579800,
-    "datetime": "2025-03-10 04:10:00",
+    "datetime": "2025-03-09T17:10:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741580400,
-    "datetime": "2025-03-10 04:20:00",
+    "datetime": "2025-03-09T17:20:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741581000,
-    "datetime": "2025-03-10 04:30:00",
+    "datetime": "2025-03-09T17:30:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741581600,
-    "datetime": "2025-03-10 04:40:00",
+    "datetime": "2025-03-09T17:40:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741582200,
-    "datetime": "2025-03-10 04:50:00",
+    "datetime": "2025-03-09T17:50:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741582800,
-    "datetime": "2025-03-10 05:00:00",
+    "datetime": "2025-03-09T18:00:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741583400,
-    "datetime": "2025-03-10 05:10:00",
+    "datetime": "2025-03-09T18:10:00.000Z",
     "speed": 38.9,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741584000,
-    "datetime": "2025-03-10 05:20:00",
+    "datetime": "2025-03-09T18:20:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741584600,
-    "datetime": "2025-03-10 05:30:00",
+    "datetime": "2025-03-09T18:30:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741585200,
-    "datetime": "2025-03-10 05:40:00",
+    "datetime": "2025-03-09T18:40:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741585800,
-    "datetime": "2025-03-10 05:50:00",
+    "datetime": "2025-03-09T18:50:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741586400,
-    "datetime": "2025-03-10 06:00:00",
+    "datetime": "2025-03-09T19:00:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741587000,
-    "datetime": "2025-03-10 06:10:00",
+    "datetime": "2025-03-09T19:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741587600,
-    "datetime": "2025-03-10 06:20:00",
+    "datetime": "2025-03-09T19:20:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741588200,
-    "datetime": "2025-03-10 06:30:00",
+    "datetime": "2025-03-09T19:30:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741588800,
-    "datetime": "2025-03-10 06:40:00",
+    "datetime": "2025-03-09T19:40:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741589400,
-    "datetime": "2025-03-10 06:50:00",
+    "datetime": "2025-03-09T19:50:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741590000,
-    "datetime": "2025-03-10 07:00:00",
+    "datetime": "2025-03-09T20:00:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741590600,
-    "datetime": "2025-03-10 07:10:00",
+    "datetime": "2025-03-09T20:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741591200,
-    "datetime": "2025-03-10 07:20:00",
+    "datetime": "2025-03-09T20:20:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741591800,
-    "datetime": "2025-03-10 07:30:00",
+    "datetime": "2025-03-09T20:30:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741592400,
-    "datetime": "2025-03-10 07:40:00",
+    "datetime": "2025-03-09T20:40:00.000Z",
     "speed": 31.5,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741593000,
-    "datetime": "2025-03-10 07:50:00",
+    "datetime": "2025-03-09T20:50:00.000Z",
     "speed": 27.8,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741593600,
-    "datetime": "2025-03-10 08:00:00",
+    "datetime": "2025-03-09T21:00:00.000Z",
     "speed": 33.3,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741594200,
-    "datetime": "2025-03-10 08:10:00",
+    "datetime": "2025-03-09T21:10:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741594800,
-    "datetime": "2025-03-10 08:20:00",
+    "datetime": "2025-03-09T21:20:00.000Z",
     "speed": 35.2,
     "location": "Sunshine Coast Airport"
   },
   {
     "unix": 1741595400,
-    "datetime": "2025-03-10 08:30:00",
+    "datetime": "2025-03-09T21:30:00.000Z",
     "speed": 37,
     "location": "Sunshine Coast Airport"
   }

@@ -1,146 +1,146 @@
 [
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "Every day or most days",
     "Proportion": 21,
     "Conf_Interval_Lower": 20.2,
     "Conf_Interval_Upper": 21.7
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "Every day or most days",
     "Proportion": 16.8,
     "Conf_Interval_Lower": 16.1,
     "Conf_Interval_Upper": 17.5
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "Every day or most days",
     "Proportion": 16.4,
     "Conf_Interval_Lower": 15.7,
     "Conf_Interval_Upper": 17.2
   },
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "Several times a week",
     "Proportion": 17.4,
     "Conf_Interval_Lower": 16.6,
     "Conf_Interval_Upper": 18.2
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "Several times a week",
     "Proportion": 15.1,
     "Conf_Interval_Lower": 14.3,
     "Conf_Interval_Upper": 15.9
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "Several times a week",
     "Proportion": 13.3,
     "Conf_Interval_Lower": 12.5,
     "Conf_Interval_Upper": 14.1
   },
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "About once a week",
     "Proportion": 12.1,
     "Conf_Interval_Lower": 11.5,
     "Conf_Interval_Upper": 12.9
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "About once a week",
     "Proportion": 12,
     "Conf_Interval_Lower": 11.3,
     "Conf_Interval_Upper": 12.7
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "About once a week",
     "Proportion": 10.4,
     "Conf_Interval_Lower": 9.7,
     "Conf_Interval_Upper": 11.1
   },
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "2 or 3 times a month",
     "Proportion": 9.7,
     "Conf_Interval_Lower": 9,
     "Conf_Interval_Upper": 10.5
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "2 or 3 times a month",
     "Proportion": 9.8,
     "Conf_Interval_Lower": 9.1,
     "Conf_Interval_Upper": 10.4
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "2 or 3 times a month",
     "Proportion": 7.7,
     "Conf_Interval_Lower": 7.2,
     "Conf_Interval_Upper": 8.2
   },
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "About once a month",
     "Proportion": 8.3,
     "Conf_Interval_Lower": 7.7,
     "Conf_Interval_Upper": 9
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "About once a month",
     "Proportion": 8.7,
     "Conf_Interval_Lower": 8.1,
     "Conf_Interval_Upper": 9.4
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "About once a month",
     "Proportion": 9.4,
     "Conf_Interval_Lower": 8.6,
     "Conf_Interval_Upper": 10.2
   },
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "Less than once a month",
     "Proportion": 16.8,
     "Conf_Interval_Lower": 16.1,
     "Conf_Interval_Upper": 17.6
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "Less than once a month",
     "Proportion": 19.2,
     "Conf_Interval_Lower": 18.5,
     "Conf_Interval_Upper": 20
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "Less than once a month",
     "Proportion": 20.8,
     "Conf_Interval_Lower": 19.9,
     "Conf_Interval_Upper": 21.7
   },
   {
-    "Wave": "2012",
+    "Wave": "2012-01-01T00:00:00.000Z",
     "Category_Name": "Never",
     "Proportion": 14.6,
     "Conf_Interval_Lower": 13.9,
     "Conf_Interval_Upper": 15.3
   },
   {
-    "Wave": "2016",
+    "Wave": "2016-01-01T00:00:00.000Z",
     "Category_Name": "Never",
     "Proportion": 18.4,
     "Conf_Interval_Lower": 17.6,
     "Conf_Interval_Upper": 19.3
   },
   {
-    "Wave": "2020",
+    "Wave": "2020-01-01T00:00:00.000Z",
     "Category_Name": "Never",
     "Proportion": 22.1,
     "Conf_Interval_Lower": 21.2,

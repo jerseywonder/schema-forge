@@ -11,7 +11,7 @@ async function runCsv(filePath) {
   const { csvParse } = await import('d3-dsv');
   const rows = csvParse(text);
 
-  const wrangled = dataFormat(rows, { sanitizeKeys: true, dropEmptyColumns: true });
+  const wrangled = dataFormat(rows, { sanitizeKeys: true, dropEmptyColumns: true, convertDates: true });
   // Ensure output directory and write to JSON file
   const outDir = path.join(__dirname, 'cleaned');
   fs.mkdirSync(outDir, { recursive: true });

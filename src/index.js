@@ -89,6 +89,10 @@ function isLikelyList(s) {
  * @param {object} [options]
  * @param {boolean} [options.preferStringNumbers=false]
  * @param {boolean} [options.numberEmptyAsNull=true]
+ * @param {boolean} [options.bestGuess=true]
+ * @param {boolean} [options.reportIgnored=false] - When true, logs which characters were stripped and which values were set to null
+ * @param {(msg:string)=>void} [options.report] - Optional logger function; defaults to console.log when reportIgnored is true
+ * @param {boolean} [options.convertDates=false] - When true, convert Date-typed columns to JavaScript Date instances
  * @param {boolean} [options.sanitizeKeys=false]
  * @param {boolean} [options.dropEmptyColumns=false]
  * @returns {Dataset}
@@ -98,6 +102,10 @@ function dataFormat(dataset, options = {}) {
   const schema = getSchema(rows, options);
   const byName = Object.fromEntries(schema.map(c => [c.name, c]));
   const numberEmptyAsNull = options.numberEmptyAsNull !== undefined ? options.numberEmptyAsNull : true;
+  const bestGuess = options.bestGuess !== undefined ? options.bestGuess : true;
+  const reportIgnored = options && options.reportIgnored === true;
+  const report = reportIgnored ? (typeof options.report === 'function' ? options.report : console.log) : null;
+  const convertDates = options.convertDates !== undefined ? options.convertDates : false;
   const out = new Array(rows.length);
   const sanitize = options && options.sanitizeKeys === true;
   const dropEmptyColumns = options && options.dropEmptyColumns === true;
@@ -111,8 +119,42 @@ function dataFormat(dataset, options = {}) {
       if (!Object.prototype.hasOwnProperty.call(src, sourceKey)) continue;
       const val = src[sourceKey];
       const targetKey = key;
-      if (col.type === 'Number') {
+      const probablyNumeric = bestGuess && col.type === 'String' && typeof col.probably === 'string' && (
+        col.probably === 'Percentage' ||
+        col.probably === 'Currency' ||
+        col.probably === 'Integer' ||
+        col.probably === 'Float' ||
+        col.probably === 'Number'
+      );
+
+      if (col.type === 'Number' || probablyNumeric) {
+        if (report) {
+          const coerced = normalizeNumber(val, { emptyAsNull: numberEmptyAsNull });
+          if (coerced === null) {
+            const s = val == null ? String(val) : String(val);
+            report(`dataFormat: set ${targetKey}[${i}] "${s}" -> null`);
+          }
+        }
         dst[targetKey] = normalizeNumber(val, { emptyAsNull: numberEmptyAsNull });
+      } else if (col.type === 'Date' && convertDates) {
+        const raw = val;
+        let converted = raw;
+        if (raw instanceof Date) {
+          converted = raw;
+        } else if (raw != null) {
+          const s = String(raw).trim();
+          if (s !== '') {
+            // First try native Date parsing (handles ISO/date-time), then loose parser for D/M/Y etc.
+            const d1 = new Date(s);
+            if (!Number.isNaN(d1.getTime())) {
+              converted = d1;
+            } else {
+              const d2 = parseLooseDate(s);
+              converted = d2 || raw;
+            }
+          }
+        }
+        dst[targetKey] = converted;
       } else if (col.type === 'Boolean') {
         dst[targetKey] = normalizeBoolean(val);
       } else {
@@ -219,14 +261,17 @@ function detectTypeAndFormat(value, preferStringNumbers = false) {
  * @param {boolean} [options.preferStringNumbers=false] - Treat numeric strings as String unless all values are numeric.
  * @param {boolean} [options.sanitizeKeys=false] - Sanitize column names (strip invisible/control chars, normalize, dedupe). Adds sourceName with original.
  * @param {boolean} [options.dropEmptyColumns=false] - If true, columns with no non-empty values are excluded from schema and output rows.
+ * @param {boolean} [options.useNullMarkersForInference=false] - If true, values matched by null markers/sentinels are skipped from inference metrics and tallies.
  * @returns {ColumnSchema[]}
  */
-function getSchema(jsonData, { preferStringNumbers = false, sanitizeKeys = false, dropEmptyColumns = false } = {}) {
+function getSchema(jsonData, { preferStringNumbers = false, sanitizeKeys = false, dropEmptyColumns = false, useNullMarkersForInference = false } = {}) {
   const rows = Array.isArray(jsonData) ? jsonData : JSON.parse(jsonData);
   const totalRows = rows.length;
   const acc = new Map();
   const usedSanitized = new Set();
   const originalToSanitized = new Map();
+  const nullInfEnabled = useNullMarkersForInference === true;
+  const nullInf = nullInfEnabled ? createNullNormalizer() : null;
   function sanitizeKey(name) {
     let s = String(name);
     try { s = s.normalize('NFC'); } catch {}
@@ -260,6 +305,11 @@ function getSchema(jsonData, { preferStringNumbers = false, sanitizeKeys = false
         keyName = originalToSanitized.get(col);
       }
       if (!Object.prototype.hasOwnProperty.call(row, col)) continue;
+      // Optionally skip values considered null by markers/sentinels to avoid skewing inference
+      if (nullInfEnabled) {
+        const maybeNull = nullInf.normalizeNull(row[col], { type: 'auto', column: keyName });
+        if (maybeNull === null) continue;
+      }
       const tf = detectTypeAndFormat(row[col], preferStringNumbers);
       if (!tf) continue;
 
@@ -756,6 +806,174 @@ function guessColumnDateFormat(rows, columnName) {
   return '__mixed__';
 }
 
+// ---- Null / missing detection ---------------------------------------------
+
+// Common textual markers (case-insensitive, trimmed)
+const DEFAULT_STRING_MARKERS = new Set([
+  '', 'null', 'none', 'n/a', 'na', 'nan', 'n.a.', 'undefined',
+  '-', '--', '—', '.', '…', '...', '*', 'missing', 'unknown', 'empty', 'tbd', 'tba'
+]);
+
+// Common numeric sentinels used in legacy exports
+const DEFAULT_NUMERIC_SENTINELS = new Set([
+  0, -1, 999, 9999, -999, -9999, 99999, 999999,
+  2147483647, -2147483648,   // 32-bit int max/min
+  4294967295                  // 32-bit uint max
+]);
+
+// Common "null" dates seen in exports (yyyy-mm-dd)
+const DEFAULT_DATE_SENTINELS = new Set([
+  '0000-00-00',              // MySQL-ish invalid
+  '1900-01-01',              // Excel-ish
+  '1899-12-30',              // Excel serial 0 anchor
+  '1900-02-29',              // Excel leap bug
+  '1970-01-01',              // Unix epoch often used as null
+  '2099-12-31', '9999-12-31' // end-of-time sentinels
+]);
+
+// If a parsed date is outside these bounds, treat as null.
+// Tweak to taste for your domain.
+const DEFAULT_DATE_BOUNDS = {
+  min: new Date('1901-01-01'), // exclude Excel-zero-ish + very old
+  max: new Date('2100-01-01')  // exclude far-future sentinels
+};
+
+// Utility: safe string normalisation
+function normStr(v) {
+  return String(v).trim().toLowerCase();
+}
+
+// Very light date string detector (common ISO, d/m/y, m/d/y)
+const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const DMY_RE = /^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/;
+
+// Parse a variety of date formats without heavy deps.
+// Returns Date or null if invalid.
+function parseLooseDate(s) {
+  if (ISO_DATE_RE.test(s)) {
+    const d = new Date(s);
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+  const m = s.match(DMY_RE);
+  if (m) {
+    let [ , a, b, c ] = m.map(Number);
+    // Heuristic: if year has 4 digits use D/M/Y; if 2 digits assume 19xx/20xx is too messy → treat as invalid here.
+    if (String(c).length === 4) {
+      // Disambiguate: if a > 12 → D/M/Y; if b > 12 → M/D/Y; else prefer D/M/Y
+      let day, mon, yr;
+      if (a > 12 && b <= 12) { day = a; mon = b; yr = c; }
+      else if (b > 12 && a <= 12) { day = b; mon = a; yr = c; }
+      else { day = a; mon = b; yr = c; }
+      const d = new Date(`${yr.toString().padStart(4,'0')}-${String(mon).padStart(2,'0')}-${String(day).padStart(2,'0')}`);
+      return Number.isNaN(d.getTime()) ? null : d;
+    }
+  }
+  // Fallback: let JS try
+  const d = new Date(s);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+// Factory so you can override per dataset/column
+function createNullNormalizer(config = {}) {
+  const {
+    stringMarkers = DEFAULT_STRING_MARKERS,
+    numericSentinels = DEFAULT_NUMERIC_SENTINELS,
+    dateSentinels = DEFAULT_DATE_SENTINELS,
+    dateBounds = DEFAULT_DATE_BOUNDS,
+    // Column-specific rules
+    perColumn = {} // e.g. { price: { zeroIsNull: false }, id: { zeroIsNull: true, numericSentinels: new Set([0, -1]) } }
+  } = config;
+
+  function isStringNullish(v, col) {
+    if (v == null) return true;
+    const s = normStr(v);
+    if (s === '') return true;
+    const markers = perColumn[col]?.stringMarkers ?? stringMarkers;
+    return markers.has(s);
+  }
+
+  function isNumericNullish(v, col) {
+    // Accept numbers or numeric-looking strings
+    if (v == null || (typeof v === 'string' && v.trim() === '')) return true;
+
+    // Strip commas, percents, currency symbols for detection only
+    const s = String(v).trim().replace(/[$€£¥,%\s]/g, '');
+    const num = Number(s);
+    if (!Number.isFinite(num)) return false;
+
+    const rules = perColumn[col] || {};
+    const sentinels = rules.numericSentinels ?? numericSentinels;
+    const zeroIsNull = rules.zeroIsNull ?? false; // opt-in: zero often meaningful
+    if (zeroIsNull && num === 0) return true;
+    return sentinels.has(num);
+  }
+
+  function isDateNullish(v, col) {
+    if (v == null) return true;
+    const s = String(v).trim();
+    if (s === '') return true;
+
+    const rules = perColumn[col] || {};
+    const sentinels = rules.dateSentinels ?? dateSentinels;
+    const bounds = rules.dateBounds ?? dateBounds;
+
+    // Normalise ISO-like string for sentinel match
+    const isoLike = ISO_DATE_RE.test(s) ? s : null;
+    if (isoLike && sentinels.has(isoLike)) return true;
+
+    const d = parseLooseDate(s);
+    if (!d) return true; // couldn't parse → treat as null
+
+    if (d < bounds.min || d > bounds.max) return true;
+    return false;
+  }
+
+  /**
+   * Normalise a value to either:
+   * - null (if it matches null markers/sentinels), or
+   * - the original value (unchanged).
+   *
+   * @param {*} value
+   * @param {Object} opts
+   * @param {'string'|'number'|'date'|'auto'} [opts.type='auto'] - hint for detection
+   * @param {string} [opts.column] - column name for perColumn overrides
+   */
+  function normalizeNull(value, opts = {}) {
+    const { type = 'auto', column } = opts;
+
+    // First pass: catch explicit textual nulls (including 'null', '-', etc.)
+    if (isStringNullish(value, column)) return null;
+
+    if (type === 'number') return isNumericNullish(value, column) ? null : value;
+    if (type === 'date') return isDateNullish(value, column) ? null : value;
+
+    // AUTO: heuristic—try date-like strings first, then numeric sentinels
+    if (typeof value === 'string') {
+      const s = value.trim();
+      // Very likely a date string?
+      if (ISO_DATE_RE.test(s) || DMY_RE.test(s) || /\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}/.test(s)) {
+        return isDateNullish(s, column) ? null : value;
+      }
+      // Numeric-looking (after stripping typical adornments)
+      if (/^[\s$€£¥\-+0-9.,%]+$/.test(s)) {
+        return isNumericNullish(s, column) ? null : value;
+      }
+      return value; // leave other strings alone (already passed string nullish test)
+    }
+
+    if (typeof value === 'number') {
+      return isNumericNullish(value, column) ? null : value;
+    }
+
+    if (value instanceof Date) {
+      return isDateNullish(value.toISOString().slice(0,10), column) ? null : value;
+    }
+
+    return value;
+  }
+
+  return { normalizeNull, isStringNullish, isNumericNullish, isDateNullish };
+}
 
 
 const api = { dataFormat, getSchema, toJSONSchema };

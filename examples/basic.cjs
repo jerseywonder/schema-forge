@@ -66,12 +66,13 @@ async function runCsv(filePath) {
   console.log('Rows:', rows.length);
   const schema = getSchema(rows);
   console.log('Schema:', schema);
+  console.log(schema[6].topK);
   //console.log(toJSONSchema(schema));
-  //console.log(dataFormat(rows));
+  let test = dataFormat(rows, { reportIgnored: true });
 }
 
 if (process.argv[2] === 'csv') {
-  runCsv('international.csv').catch(err => { console.error(err); process.exit(1); });
+  runCsv('Book4.csv').catch(err => { console.error(err); process.exit(1); });
 } else {
   runInMemory();
 }
